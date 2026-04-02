@@ -1,0 +1,13 @@
+{
+  "name": "turn",
+  "version": "1.0.0",
+  "description": "Automated Unit Turnovers - Turn manual coordination into seamless workflows",
+  "scripts": {
+    "start": "node scripts/generate-supabase-config.js && http-server -p 8000 -c-1",
+    "dev": "node scripts/generate-supabase-config.js && http-server -p 8000 -c-1"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}
+
