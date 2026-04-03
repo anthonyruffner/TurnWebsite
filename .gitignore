@@ -37,3 +37,6 @@ node_modules/
 # Supabase: generated from .env.local (or copy from supabase-config.example.js)
 supabase-config.js
 
+# Form webhook config (contains your Google Apps Script URL)
+form-config.js
+

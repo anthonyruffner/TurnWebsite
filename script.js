@@ -1,20 +1,58 @@
 // ===================================
-// Supabase client (optional – used for demo & contact form submissions)
+// Web3Forms Submission
 // ===================================
-var supabaseClient = null;
-if (typeof window !== 'undefined' && window.SUPABASE_URL && window.SUPABASE_ANON_KEY &&
-    window.SUPABASE_URL !== 'YOUR_SUPABASE_URL' && window.SUPABASE_ANON_KEY !== 'YOUR_SUPABASE_ANON_KEY' &&
-    !String(window.SUPABASE_URL).includes('YOUR_PROJECT_REF') &&
-    String(window.SUPABASE_ANON_KEY).indexOf('eyJ') === 0 &&
-    window.supabase) {
-    try {
-        supabaseClient = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
-    } catch (e) {
-        console.warn('Supabase client init failed:', e);
-    }
+function getWeb3FormsKey() {
+    return (typeof window !== 'undefined' && window.WEB3FORMS_KEY &&
+            window.WEB3FORMS_KEY !== 'YOUR_ACCESS_KEY')
+        ? window.WEB3FORMS_KEY : null;
+}
+
+async function submitForm(data) {
+    const key = getWeb3FormsKey();
+    if (!key) throw new Error('Web3Forms key not configured');
+
+    const payload = {
+        access_key: key,
+        subject: 'TURN Website — ' + (data.form === 'demo_request' ? 'New Demo Request' : 'New Contact Message'),
+        from_name: 'TURN Website',
+        ...data
+    };
+
+    const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+    if (!result.success) throw new Error(result.message || 'Submission failed');
+    return true;
 }
 
 // ===================================
+// Mobile Hamburger Menu
+// ===================================
+
+(function initHamburger() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (!hamburger || !navLinks) return;
+
+    hamburger.addEventListener('click', function () {
+        hamburger.classList.toggle('active');
+        navLinks.classList.toggle('open');
+        document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+    });
+
+    // Close menu when a nav link is clicked
+    navLinks.querySelectorAll('.nav-link, .mobile-demo-link').forEach(function (link) {
+        link.addEventListener('click', function () {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+})();
 
 // Prevent browser scroll restoration
 if ('scrollRestoration' in history) {
@@ -1140,28 +1178,24 @@ if (header) {
                 }, 3000);
             }
             
-            if (supabaseClient) {
-                submitBtn.disabled = true;
-                submitBtn.textContent = 'Sending…';
-                try {
-                    const { error } = await supabaseClient.from('demo_requests').insert({
-                        full_name: data.fullName || '',
-                        email: data.emailAddress || '',
-                        phone: data.phoneNumber || null,
-                        company: data.company || null,
-                        message: data.message || null
-                    });
-                    if (error) throw error;
-                    showSuccess();
-                } catch (err) {
-                    console.error('Demo request submit error:', err);
-                    showError(err.message || 'Something went wrong');
-                } finally {
-                    submitBtn.disabled = false;
-                }
-            } else {
-                console.log('Get demo form submitted (no Supabase):', data);
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+            try {
+                await submitForm({
+                    form: 'demo_request',
+                    full_name: data.fullName || '',
+                    email: data.emailAddress || '',
+                    phone: data.phoneNumber || '',
+                    company: data.company || '',
+                    message: data.message || '',
+                    submitted_at: new Date().toISOString()
+                });
                 showSuccess();
+            } catch (err) {
+                console.error('Demo request submit error:', err);
+                showError('Something went wrong');
+            } finally {
+                submitBtn.disabled = false;
             }
         });
     }
@@ -1204,27 +1238,23 @@ if (header) {
             }, 3000);
         }
         
-        if (supabaseClient) {
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending…';
-            try {
-                const { error } = await supabaseClient.from('contact_messages').insert({
-                    full_name: data.fullName || '',
-                    email: data.email || '',
-                    company: data.company || null,
-                    message: data.message || null
-                });
-                if (error) throw error;
-                showSuccess();
-            } catch (err) {
-                console.error('Contact form submit error:', err);
-                showError(err.message || 'Something went wrong');
-            } finally {
-                submitBtn.disabled = false;
-            }
-        } else {
-            console.log('Contact form submitted (no Supabase):', data);
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending…';
+        try {
+            await submitForm({
+                form: 'contact_message',
+                full_name: data.fullName || '',
+                email: data.email || '',
+                company: data.company || '',
+                message: data.message || '',
+                submitted_at: new Date().toISOString()
+            });
             showSuccess();
+        } catch (err) {
+            console.error('Contact form submit error:', err);
+            showError('Something went wrong');
+        } finally {
+            submitBtn.disabled = false;
         }
     });
 })();
