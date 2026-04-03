@@ -1260,6 +1260,31 @@ if (header) {
 })();
 
 // ===================================
+// CTA Email Form — open Get Demo overlay on submit/enter
+// ===================================
+
+(function initCtaEmailForm() {
+    const form = document.getElementById('ctaEmailForm');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        const email = document.getElementById('ctaEmailInput');
+        const emailVal = email ? email.value : '';
+
+        // Open the Get Demo overlay
+        const getDemoBtn = document.querySelector('[data-get-demo]');
+        if (getDemoBtn) getDemoBtn.click();
+
+        // Pre-fill email in the overlay form
+        setTimeout(function () {
+            const overlayEmail = document.getElementById('emailAddress');
+            if (overlayEmail && emailVal) overlayEmail.value = emailVal;
+        }, 100);
+    });
+})();
+
+// ===================================
 // Metric Count-Up Animation
 // Animates numeric metrics on card hover
 // ===================================
