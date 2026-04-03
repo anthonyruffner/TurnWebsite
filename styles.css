@@ -15,13 +15,35 @@
     --dashboard-gradient-start: #CD6633;
     --dashboard-gradient-end: #bae1ff;
     /* Typography */
-    --font-display: 'Playfair Display', Georgia, 'Times New Roman', Times, serif;
+    --font-display: Georgia, 'Times New Roman', Times, serif;
     --font-serif: Georgia, 'Times New Roman', Times, serif;
     --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+/* ── Section eyebrow label — used site-wide ── */
+.section-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--turn-brown);
+    margin-bottom: 1rem;
+    font-family: var(--font-sans);
+}
+
+.section-eyebrow::before {
+    content: '';
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: var(--turn-brown);
 }
 
 body {
