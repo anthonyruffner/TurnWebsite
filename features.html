@@ -3,12 +3,674 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Operational Efficiency - Save 12 hours+ per week through automated vendor coordination">
-    <title>Features - Turn</title>
+    <meta name="description" content="The Make-Ready Platform — One system for property managers, regionals, and vendors.">
+    <title>Platform — Turn</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=1738275600">
+    <style>
+        :root {
+            --p-bg: #FAF9F7;
+            --p-surface: #ffffff;
+            --p-border: rgba(0,0,0,0.08);
+            --p-accent: #CD6633;
+            --p-text: #1a1a1a;
+            --p-muted: #555555;
+            --p-light: #888888;
+            --p-tag-bg: rgba(205,102,51,0.08);
+            --p-strip: #F2EDE8;
+            --p-font: 'Inter', system-ui, sans-serif;
+            --p-display: Georgia, 'Times New Roman', serif;
+        }
+
+        .platform-page {
+            background: var(--p-bg);
+            font-family: var(--p-font);
+            color: var(--p-text);
+        }
+
+        .p-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ── Hero ── */
+        .p-hero {
+            padding: 5rem 0 4.5rem;
+            background: var(--p-bg);
+        }
+
+        .p-hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .p-hero-title {
+            font-family: var(--p-display);
+            font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+            font-weight: 400;
+            line-height: 1.15;
+            color: var(--p-text);
+            margin-bottom: 1.25rem;
+        }
+
+        .p-hero-sub {
+            font-size: 1.1rem;
+            color: var(--p-muted);
+            line-height: 1.75;
+            margin-bottom: 2rem;
+            max-width: 460px;
+        }
+
+        /* Board Mockup */
+        .board-mockup {
+            background: #fff;
+            border: 1px solid var(--p-border);
+            border-radius: 12px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.09);
+            overflow: hidden;
+        }
+
+        .board-mockup-header {
+            background: #f8f7f5;
+            border-bottom: 1px solid var(--p-border);
+            padding: 0.65rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .board-dot { width: 10px; height: 10px; border-radius: 50%; background: #ddd; }
+        .board-dot:nth-child(1) { background: #f87171; }
+        .board-dot:nth-child(2) { background: #fbbf24; }
+        .board-dot:nth-child(3) { background: #4ade80; }
+
+        .board-title-bar {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--p-light);
+            margin-left: 6px;
+            font-family: var(--p-font);
+        }
+
+        .board-body { padding: 1rem; }
+
+        .board-col-headers,
+        .board-row {
+            display: grid;
+            grid-template-columns: 1fr repeat(5, 1fr);
+            gap: 4px;
+            margin-bottom: 4px;
+        }
+
+        .board-col-label {
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--p-light);
+            padding: 0 4px;
+        }
+
+        .board-unit-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--p-text);
+            padding: 6px 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .board-cell {
+            height: 28px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 600;
+            font-family: var(--p-font);
+        }
+
+        .cell-completed  { background: #e8f5e9; color: #2e7d32; }
+        .cell-inprogress { background: #fff3e0; color: #CD6633; }
+        .cell-scheduled  { background: #e3f0ff; color: #1565c0; }
+        .cell-unscheduled{ background: #f5f5f5; color: #bbb; border: 1px solid #eee; }
+        .cell-rejected   { background: #fdecea; color: #c62828; }
+
+        /* ── How It Works ── */
+        .p-flow-section {
+            padding: 6rem 0;
+            background: var(--p-surface);
+            border-top: 1px solid var(--p-border);
+        }
+
+        .p-section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--p-accent);
+            margin-bottom: 0.6rem;
+            font-family: var(--p-font);
+        }
+
+        .p-section-title {
+            font-family: var(--p-display);
+            font-size: clamp(1.75rem, 3vw, 2.5rem);
+            font-weight: 400;
+            color: var(--p-text);
+            line-height: 1.25;
+            margin-bottom: 3.5rem;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 0;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .flow-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 0 0.5rem;
+        }
+
+        .flow-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 19px;
+            left: 50%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(205,102,51,0.4), rgba(205,102,51,0.1));
+            z-index: 0;
+        }
+
+        .flow-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--p-tag-bg);
+            border: 1.5px solid rgba(205,102,51,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            margin-bottom: 0.75rem;
+            position: relative;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        .flow-step-num {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--p-accent);
+            margin-bottom: 0.35rem;
+            font-family: var(--p-font);
+        }
+
+        .flow-step-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--p-text);
+            margin-bottom: 0.35rem;
+            line-height: 1.35;
+            font-family: var(--p-font);
+        }
+
+        .flow-step-desc {
+            font-size: 11px;
+            color: var(--p-muted);
+            line-height: 1.55;
+            font-family: var(--p-font);
+        }
+
+        .flow-callout {
+            background: var(--p-tag-bg);
+            border-left: 3px solid var(--p-accent);
+            border-radius: 0 8px 8px 0;
+            padding: 1.25rem 1.75rem;
+            font-family: var(--p-display);
+            font-style: italic;
+            font-size: 1.05rem;
+            color: var(--p-text);
+            line-height: 1.65;
+            max-width: 720px;
+        }
+
+        /* ── Three Roles ── */
+        .p-roles-section {
+            padding: 6rem 0;
+            background: var(--p-bg);
+            border-top: 1px solid var(--p-border);
+        }
+
+        .p-roles-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 0;
+        }
+
+        .p-role-card {
+            background: var(--p-surface);
+            border: 1px solid var(--p-border);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p-role-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--p-accent);
+            opacity: 0.35;
+        }
+
+        .p-role-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--p-tag-bg);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 1.25rem;
+        }
+
+        .p-role-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--p-text);
+            margin-bottom: 0.65rem;
+            font-family: var(--p-font);
+        }
+
+        .p-role-body {
+            font-size: 0.9rem;
+            color: var(--p-muted);
+            line-height: 1.75;
+            margin-bottom: 1.25rem;
+            font-family: var(--p-font);
+        }
+
+        .p-role-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .p-tag {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--p-accent);
+            background: var(--p-tag-bg);
+            border: 1px solid rgba(205,102,51,0.15);
+            border-radius: 100px;
+            padding: 3px 10px;
+            font-family: var(--p-font);
+        }
+
+        /* ── Feature Deep-Dives ── */
+        .p-feature-section {
+            padding: 5.5rem 0;
+            border-top: 1px solid var(--p-border);
+        }
+
+        .p-feature-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .p-feature-inner.reverse {
+            direction: rtl;
+        }
+        .p-feature-inner.reverse > * { direction: ltr; }
+
+        .p-feature-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--p-accent);
+            margin-bottom: 0.6rem;
+            font-family: var(--p-font);
+        }
+
+        .p-feature-heading {
+            font-family: var(--p-display);
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 400;
+            color: var(--p-text);
+            line-height: 1.25;
+            margin-bottom: 0.45rem;
+        }
+
+        .p-feature-subheading {
+            font-family: var(--p-display);
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--p-light);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .p-feature-body {
+            font-size: 0.95rem;
+            color: var(--p-muted);
+            line-height: 1.85;
+            font-family: var(--p-font);
+        }
+
+        /* Mockup cards */
+        .p-mockup-card {
+            background: #fff;
+            border: 1px solid var(--p-border);
+            border-radius: 12px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            padding: 1.5rem;
+        }
+
+        .p-mockup-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--p-light);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 1.25rem;
+            font-family: var(--p-font);
+        }
+
+        /* Kanban */
+        .kanban-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+        .kanban-col-header {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--p-light);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-family: var(--p-font);
+        }
+
+        .kanban-card {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 7px;
+            padding: 8px 10px;
+            margin-bottom: 7px;
+        }
+
+        .kanban-unit {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--p-text);
+            margin-bottom: 4px;
+            font-family: var(--p-font);
+        }
+
+        .kanban-status {
+            font-size: 9px;
+            font-weight: 600;
+            border-radius: 100px;
+            padding: 2px 7px;
+            display: inline-block;
+            font-family: var(--p-font);
+        }
+
+        .ks-scheduled  { background: #e3f0ff; color: #1565c0; }
+        .ks-inprogress { background: #fff3e0; color: #CD6633; }
+        .ks-completed  { background: #e8f5e9; color: #2e7d32; }
+
+        /* Mobile job card */
+        .mobile-frame {
+            background: #1a1a1a;
+            border-radius: 28px;
+            padding: 5px;
+            max-width: 240px;
+            margin: 0 auto;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .mobile-screen {
+            background: #fff;
+            border-radius: 23px;
+            padding: 1.25rem;
+        }
+
+        .mobile-job-badge {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--p-accent);
+            background: var(--p-tag-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            font-family: var(--p-font);
+        }
+
+        .mobile-job-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--p-text);
+            margin-bottom: 6px;
+            font-family: var(--p-font);
+        }
+
+        .mobile-job-detail {
+            font-size: 11px;
+            color: var(--p-muted);
+            margin-bottom: 4px;
+            font-family: var(--p-font);
+        }
+
+        .mobile-job-divider { height: 1px; background: #f0f0f0; margin: 0.85rem 0; }
+
+        .mobile-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 9px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            font-family: var(--p-font);
+        }
+
+        .mobile-btn-primary  { background: var(--p-accent); color: #fff; }
+        .mobile-btn-secondary{ background: #f5f5f5; color: var(--p-text); }
+
+        /* Alerts */
+        .alert-list { display: flex; flex-direction: column; gap: 8px; }
+
+        .alert-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            border-radius: 8px;
+        }
+
+        .alert-icon { font-size: 14px; flex-shrink: 0; }
+        .alert-text { flex: 1; }
+
+        .alert-unit {
+            font-weight: 600;
+            color: var(--p-text);
+            display: block;
+            font-size: 12px;
+            font-family: var(--p-font);
+        }
+
+        .alert-desc {
+            color: var(--p-muted);
+            font-size: 11px;
+            font-family: var(--p-font);
+        }
+
+        .alert-success { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .alert-warning { background: #fff7ed; border: 1px solid #fed7aa; }
+        .alert-info    { background: #f0f9ff; border: 1px solid #bae6fd; }
+
+        .alert-action-btn {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--p-accent);
+            background: var(--p-tag-bg);
+            padding: 4px 9px;
+            border-radius: 5px;
+            white-space: nowrap;
+            font-family: var(--p-font);
+        }
+
+        /* Analytics */
+        .analytics-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 80px;
+            margin-bottom: 1.25rem;
+            padding: 0 2px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .analytics-bar {
+            flex: 1;
+            background: linear-gradient(to top, var(--p-accent), rgba(205,102,51,0.45));
+            border-radius: 4px 4px 0 0;
+        }
+
+        .analytics-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+        .analytics-stat {
+            background: #faf9f7;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .analytics-stat-val {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--p-accent);
+            display: block;
+            font-family: var(--p-font);
+        }
+
+        .analytics-stat-label {
+            font-size: 9px;
+            color: var(--p-light);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: var(--p-font);
+        }
+
+        /* ── Philosophy ── */
+        .p-philosophy {
+            background: var(--p-strip);
+            padding: 5.5rem 0;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .p-philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .p-philosophy-item strong {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--p-text);
+            margin-bottom: 0.5rem;
+            font-family: var(--p-font);
+        }
+
+        .p-philosophy-item p {
+            font-size: 0.875rem;
+            color: var(--p-muted);
+            line-height: 1.75;
+            font-family: var(--p-font);
+        }
+
+        /* ── Bottom CTA ── */
+        .p-cta-section {
+            padding: 7rem 0;
+            text-align: center;
+            background: var(--p-bg);
+        }
+
+        .p-cta-title {
+            font-family: var(--p-display);
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            color: var(--p-text);
+            margin-bottom: 0.85rem;
+        }
+
+        .p-cta-sub {
+            font-size: 1.05rem;
+            color: var(--p-muted);
+            margin-bottom: 2.5rem;
+            font-style: italic;
+            font-family: var(--p-display);
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 1024px) {
+            .flow-steps { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+            .flow-step:not(:last-child)::after { display: none; }
+            .p-philosophy-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .p-hero-inner,
+            .p-feature-inner { grid-template-columns: 1fr; direction: ltr; }
+            .p-feature-inner.reverse { direction: ltr; }
+            .p-roles-grid { grid-template-columns: 1fr; }
+            .flow-steps { grid-template-columns: 1fr; gap: 1.75rem; }
+            .flow-step { align-items: flex-start; text-align: left; flex-direction: row; gap: 1rem; }
+            .flow-icon { flex-shrink: 0; margin-bottom: 0; }
+            .p-hero { padding: 3rem 0 2.5rem; }
+            .p-flow-section,
+            .p-roles-section,
+            .p-feature-section { padding: 4rem 0; }
+            .kanban-cols { grid-template-columns: 1fr; }
+            .analytics-stats { grid-template-columns: repeat(3, 1fr); }
+            .p-philosophy-grid { grid-template-columns: 1fr; }
+            .board-col-headers,
+            .board-row { grid-template-columns: 1fr repeat(3, 1fr); }
+            .board-col-label:nth-child(n+5),
+            .board-cell:nth-child(n+5) { display: none; }
+        }
+
+        @media (max-width: 480px) {
+            .p-container { padding: 0 1.25rem; }
+            .analytics-stats { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
     <header class="header">
@@ -36,71 +698,294 @@
         </nav>
     </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="features-hero">
-            <div class="features-hero-container">
-                <div class="features-hero-content">
-                    <div class="features-hero-text">
-                        <h1 class="features-hero-title">The Make-Ready Platform.</h1>
-                        <p class="features-hero-subtitle">One place to schedule vendors, track every step, and get units move-in ready. Faster.</p>
-                        <div class="features-hero-actions">
-                            <a href="#" class="btn btn-primary" data-get-demo>Schedule a Demo</a>
+    <main class="platform-page">
+
+        <!-- 1. Hero -->
+        <section class="p-hero">
+            <div class="p-container">
+                <div class="p-hero-inner">
+                    <div>
+                        <h1 class="p-hero-title">The Make-Ready Platform.</h1>
+                        <p class="p-hero-sub">One system for property managers, regionals, and vendors — built around the unit turn.</p>
+                        <a href="#" class="btn btn-primary" data-get-demo>Schedule a Demo</a>
+                    </div>
+                    <div>
+                        <div class="board-mockup">
+                            <div class="board-mockup-header">
+                                <div class="board-dot"></div>
+                                <div class="board-dot"></div>
+                                <div class="board-dot"></div>
+                                <span class="board-title-bar">Make-Ready Board</span>
+                            </div>
+                            <div class="board-body">
+                                <div class="board-col-headers">
+                                    <div class="board-col-label">Unit</div>
+                                    <div class="board-col-label">Cleaning</div>
+                                    <div class="board-col-label">Painting</div>
+                                    <div class="board-col-label">Carpet</div>
+                                    <div class="board-col-label">Inspect</div>
+                                    <div class="board-col-label">Move-In</div>
+                                </div>
+                                <div class="board-row">
+                                    <div class="board-unit-label">TG-1</div>
+                                    <div class="board-cell cell-completed">Done</div>
+                                    <div class="board-cell cell-inprogress">Apr 6</div>
+                                    <div class="board-cell cell-scheduled">Apr 8</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">May 1</div>
+                                </div>
+                                <div class="board-row">
+                                    <div class="board-unit-label">SH-01</div>
+                                    <div class="board-cell cell-inprogress">Apr 5</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">May 13</div>
+                                </div>
+                                <div class="board-row">
+                                    <div class="board-unit-label">Unit 100</div>
+                                    <div class="board-cell cell-completed">Done</div>
+                                    <div class="board-cell cell-rejected">Rejected</div>
+                                    <div class="board-cell cell-rejected">Rejected</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">Apr 10</div>
+                                </div>
+                                <div class="board-row">
+                                    <div class="board-unit-label">MG-01</div>
+                                    <div class="board-cell cell-scheduled">Apr 7</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">Apr 9</div>
+                                </div>
+                                <div class="board-row">
+                                    <div class="board-unit-label">3000</div>
+                                    <div class="board-cell cell-completed">Done</div>
+                                    <div class="board-cell cell-inprogress">Apr 6</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">Apr 16</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="features-hero-visual">
-                        <div class="dashboard-3d-container">
-                            <!-- Main Dashboard Mockup -->
-                            <div class="dashboard-mockup shadow-2xl">
-                                <div class="mockup-header">
-                                    <div class="mockup-dots">
-                                        <span></span><span></span><span></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. How TURN Works -->
+        <section class="p-flow-section">
+            <div class="p-container">
+                <p class="p-section-label">How It Works</p>
+                <h2 class="p-section-title">From Move-Out To Move-In Ready.</h2>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="flow-icon">🏠</div>
+                        <div>
+                            <div class="flow-step-num">01</div>
+                            <div class="flow-step-title">Move-Out Logged</div>
+                            <div class="flow-step-desc">A unit is flagged as vacant. The turn clock starts.</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">📋</div>
+                        <div>
+                            <div class="flow-step-num">02</div>
+                            <div class="flow-step-title">Scope Set</div>
+                            <div class="flow-step-desc">Property manager builds the make-ready checklist for the unit.</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">📤</div>
+                        <div>
+                            <div class="flow-step-num">03</div>
+                            <div class="flow-step-title">Vendors Assigned</div>
+                            <div class="flow-step-desc">Each job is dispatched to the right vendor. They get notified instantly.</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">✅</div>
+                        <div>
+                            <div class="flow-step-num">04</div>
+                            <div class="flow-step-title">Vendors Confirm & Execute</div>
+                            <div class="flow-step-desc">Vendors accept the job and mark it complete from their phone.</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔍</div>
+                        <div>
+                            <div class="flow-step-num">05</div>
+                            <div class="flow-step-title">Completion Verified</div>
+                            <div class="flow-step-desc">TURN confirms the work and updates the board automatically.</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔑</div>
+                        <div>
+                            <div class="flow-step-num">06</div>
+                            <div class="flow-step-title">Unit Cleared</div>
+                            <div class="flow-step-desc">Property manager sees the unit is move-in ready. Leasing can proceed.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flow-callout">
+                    "Every step is visible to the right person at the right time, without anyone chasing an update."
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Three Roles -->
+        <section class="p-roles-section">
+            <div class="p-container">
+                <p class="p-section-label">Who It's Built For</p>
+                <h2 class="p-section-title" style="margin-bottom: 2.5rem;">Three Roles. One Platform.</h2>
+                <div class="p-roles-grid">
+                    <div class="p-role-card">
+                        <div class="p-role-icon">📋</div>
+                        <h3 class="p-role-title">Property Managers</h3>
+                        <p class="p-role-body">Schedule every vendor step, confirm completions, and run the full make-ready from a single board.</p>
+                        <div class="p-role-tags">
+                            <span class="p-tag">Vendor Scheduling</span>
+                            <span class="p-tag">Completion Tracking</span>
+                            <span class="p-tag">Unit Board</span>
+                        </div>
+                    </div>
+                    <div class="p-role-card">
+                        <div class="p-role-icon">📊</div>
+                        <h3 class="p-role-title">Regionals &amp; Ownership</h3>
+                        <p class="p-role-body">See turn times, vendor performance, and unit status across your entire portfolio in real time. The visibility that protects NOI.</p>
+                        <div class="p-role-tags">
+                            <span class="p-tag">Portfolio View</span>
+                            <span class="p-tag">Turn Time Analytics</span>
+                            <span class="p-tag">Vendor On-Time Rates</span>
+                        </div>
+                    </div>
+                    <div class="p-role-card">
+                        <div class="p-role-icon">📱</div>
+                        <h3 class="p-role-title">Vendors</h3>
+                        <p class="p-role-body">Get your assignments, confirm dates, and update the property team from your phone. No app to download. No login to remember.</p>
+                        <div class="p-role-tags">
+                            <span class="p-tag">SMS Dispatch</span>
+                            <span class="p-tag">Job Confirmation</span>
+                            <span class="p-tag">Completion Proof</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4a. Operational Efficiency -->
+        <section class="p-feature-section" style="background: var(--p-surface);">
+            <div class="p-container">
+                <div class="p-feature-inner">
+                    <div>
+                        <p class="p-feature-label">Operational Efficiency</p>
+                        <h2 class="p-feature-heading">Your Entire Make-Ready. In One Place.</h2>
+                        <p class="p-feature-subheading">No more spreadsheets, whiteboards, or 40 emails per unit.</p>
+                        <p class="p-feature-body">Schedule every vendor step for a unit and watch your board update automatically as work gets done. Each unit shows its current status, what's pending, and who's responsible without you having to ask.</p>
+                    </div>
+                    <div>
+                        <div class="p-mockup-card">
+                            <div class="p-mockup-title">Make-Ready Board</div>
+                            <div class="kanban-cols">
+                                <div>
+                                    <div class="kanban-col-header">Scheduled</div>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 204</div>
+                                        <span class="kanban-status ks-scheduled">Scheduled</span>
                                     </div>
-                                    <div class="mockup-search"></div>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 519</div>
+                                        <span class="kanban-status ks-scheduled">Scheduled</span>
+                                    </div>
                                 </div>
-                                <div class="mockup-body">
-                                    <div class="mockup-sidebar">
-                                        <div class="sidebar-item"></div>
-                                        <div class="sidebar-item active"></div>
-                                        <div class="sidebar-item"></div>
-                                        <div class="sidebar-item"></div>
+                                <div>
+                                    <div class="kanban-col-header">In Progress</div>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 311</div>
+                                        <span class="kanban-status ks-inprogress">In Progress</span>
                                     </div>
-                                    <div class="mockup-content">
-                                        <div class="mockup-board-header">
-                                            <div class="board-title">Make-Ready Board</div>
-                                            <div class="board-filters"></div>
-                                        </div>
-                                        <div class="mockup-board-grid">
-                                            <div class="board-column">
-                                                <div class="column-header">Scheduled</div>
-                                                <div class="board-card"></div>
-                                                <div class="board-card"></div>
-                                            </div>
-                                            <div class="board-column">
-                                                <div class="column-header">In Progress</div>
-                                                <div class="board-card orange-accent"></div>
-                                                <div class="board-card"></div>
-                                            </div>
-                                            <div class="board-column">
-                                                <div class="column-header">Completed</div>
-                                                <div class="board-card success-accent"></div>
-                                            </div>
-                                        </div>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 402</div>
+                                        <span class="kanban-status ks-inprogress">In Progress</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="kanban-col-header">Completed</div>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 108</div>
+                                        <span class="kanban-status ks-completed">Completed</span>
                                     </div>
                                 </div>
                             </div>
-                            <!-- Mobile View Card Overlay -->
-                            <div class="mobile-mockup shadow-xl">
-                                <div class="mobile-header">
-                                    <div class="mobile-notch"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4b. Vendor Dispatch -->
+        <section class="p-feature-section" style="background: var(--p-bg);">
+            <div class="p-container">
+                <div class="p-feature-inner reverse">
+                    <div>
+                        <p class="p-feature-label">Vendor-First Design</p>
+                        <h2 class="p-feature-heading">Vendors Actually Use It.</h2>
+                        <p class="p-feature-subheading">Because it was built from their side of the process.</p>
+                        <p class="p-feature-body">Most property software is built for the person at a desk. TURN is built for the vendor showing up to do the work. They receive a clean job summary, confirm via a simple link, and mark completion with proof. No app download required.</p>
+                    </div>
+                    <div>
+                        <div class="mobile-frame">
+                            <div class="mobile-screen">
+                                <span class="mobile-job-badge">Job Assignment</span>
+                                <div class="mobile-job-title">Unit 402 · Cleaning</div>
+                                <div class="mobile-job-detail">📅 Tuesday, Apr 8</div>
+                                <div class="mobile-job-detail">🕘 9:00am</div>
+                                <div class="mobile-job-detail">📍 Magnolia Gardens</div>
+                                <div class="mobile-job-divider"></div>
+                                <div class="mobile-btn mobile-btn-primary">Accept Job</div>
+                                <div class="mobile-btn mobile-btn-secondary">Mark Complete</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4c. Real-Time Alerts -->
+        <section class="p-feature-section" style="background: var(--p-surface);">
+            <div class="p-container">
+                <div class="p-feature-inner">
+                    <div>
+                        <p class="p-feature-label">Real-Time Alerts</p>
+                        <h2 class="p-feature-heading">Know The Moment Something Goes Off Track.</h2>
+                        <p class="p-feature-subheading">No more end-of-day surprises.</p>
+                        <p class="p-feature-body">TURN confirms every job with your vendor before the scheduled date. If a vendor is late, declines, or goes silent, you're alerted immediately with options to reassign or follow up. You find out about problems before they become delays.</p>
+                    </div>
+                    <div>
+                        <div class="p-mockup-card">
+                            <div class="p-mockup-title">Live Alerts</div>
+                            <div class="alert-list">
+                                <div class="alert-item alert-success">
+                                    <span class="alert-icon">✅</span>
+                                    <div class="alert-text">
+                                        <span class="alert-unit">Unit 204 · Cleaning Completed</span>
+                                        <span class="alert-desc">Just now</span>
+                                    </div>
                                 </div>
-                                <div class="mobile-content">
-                                    <div class="mobile-card-title">Unit 402</div>
-                                    <div class="mobile-status-badge">In Progress</div>
-                                    <div class="mobile-task-list">
-                                        <div class="mobile-task checked"></div>
-                                        <div class="mobile-task"></div>
-                                        <div class="mobile-task"></div>
+                                <div class="alert-item alert-warning">
+                                    <span class="alert-icon">⚠️</span>
+                                    <div class="alert-text">
+                                        <span class="alert-unit">Unit 311 · Vendor Unresponsive</span>
+                                        <span class="alert-desc">No confirmation after 24h</span>
+                                    </div>
+                                    <span class="alert-action-btn">Reassign</span>
+                                </div>
+                                <div class="alert-item alert-info">
+                                    <span class="alert-icon">🕐</span>
+                                    <div class="alert-text">
+                                        <span class="alert-unit">Unit 519 · Scheduled Tomorrow</span>
+                                        <span class="alert-desc">Painting · 8:00am</span>
                                     </div>
                                 </div>
                             </div>
@@ -110,216 +995,82 @@
             </div>
         </section>
 
-        <!-- Feature Section 1: Operational Efficiency (Text Left, Graphic Right) -->
-        <section class="operational-feature-section" id="operational-efficiency">
-            <div class="operational-feature-container">
-                <div class="operational-feature-content operational-feature-left">
-                    <div class="operational-feature-text">
-                        <h2 class="operational-section-heading">Operational Efficiency</h2>
-                        <p class="operational-section-subheading">Your Entire Make-Ready, In One Place.</p>
-                        <p class="operational-feature-description">Schedule every vendor step, track completion in real time, and watch your board update automatically. No more spreadsheets, whiteboards, or 40+ emails per unit.</p>
-
+        <!-- 4d. Analytics -->
+        <section class="p-feature-section" style="background: var(--p-bg);">
+            <div class="p-container">
+                <div class="p-feature-inner reverse">
+                    <div>
+                        <p class="p-feature-label">Analytics</p>
+                        <h2 class="p-feature-heading">Data That Didn't Exist Before.</h2>
+                        <p class="p-feature-subheading">Not dashboards for dashboards' sake — insight that protects NOI.</p>
+                        <p class="p-feature-body">See average turn times by property, vendor on-time rates, job acceptance rates, and how long units sit vacant waiting for work. Regionals and ownership get the visibility they need across the whole portfolio, automatically, as a byproduct of the work being done.</p>
                     </div>
-                    <div class="operational-feature-image">
-                        <!-- High-End Dashboard Illustration -->
-                        <div class="dashboard-widget-container">
-                            <!-- Floating Badge -->
-                            <div class="saved-time-badge">12h Saved</div>
-                            
-                            <svg viewBox="0 0 320 280" fill="none" xmlns="http://www.w3.org/2000/svg" class="dashboard-svg">
-                                <!-- Card Background with subtle border -->
-                                <rect width="320" height="280" rx="32" fill="white"/>
-                                <rect x="0.5" y="0.5" width="319" height="279" rx="31.5" stroke="#f0f0f0" stroke-width="1"/>
-                                
-                                <!-- Row 1: Success -->
-                                <g class="dashboard-row">
-                                    <rect x="24" y="40" width="32" height="32" rx="8" fill="#f0fdf4"/>
-                                    <path d="M32 56 L38 62 L48 50" stroke="#4ADE80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    
-                                    <rect x="72" y="46" width="120" height="8" rx="4" fill="#F3F4F6"/>
-                                    <rect x="72" y="62" width="80" height="6" rx="3" fill="#F3F4F6" opacity="0.6"/>
-                                    
-                                    <rect x="220" y="46" width="76" height="20" rx="10" fill="#f0fdf4"/>
-                                    <text x="238" y="60" fill="#4ADE80" font-family="sans-serif" font-size="10" font-weight="600">Success</text>
-                                </g>
-                                
-                                <!-- Row 2: Pending -->
-                                <g class="dashboard-row">
-                                    <rect x="24" y="104" width="32" height="32" rx="8" fill="#fff7ed"/>
-                                    <circle cx="40" cy="120" r="6" stroke="#CD6633" stroke-width="2"/>
-                                    <path d="M40 117 V120 L43 123" stroke="#CD6633" stroke-width="2" stroke-linecap="round"/>
-                                    
-                                    <rect x="72" y="110" width="140" height="8" rx="4" fill="#F3F4F6"/>
-                                    <rect x="72" y="126" width="100" height="6" rx="3" fill="#F3F4F6" opacity="0.6"/>
-                                    
-                                    <rect x="220" y="110" width="76" height="20" rx="10" fill="#fff7ed"/>
-                                    <text x="238" y="124" fill="#CD6633" font-family="sans-serif" font-size="10" font-weight="600">Pending</text>
-                                </g>
-                                
-                                <!-- Row 3: Scheduled -->
-                                <g class="dashboard-row">
-                                    <rect x="24" y="168" width="32" height="32" rx="8" fill="#F9FAFB"/>
-                                    <rect x="32" y="176" width="16" height="16" rx="3" stroke="#9CA3AF" stroke-width="2"/>
-                                    <line x1="32" y1="182" x2="48" y2="182" stroke="#9CA3AF" stroke-width="2"/>
-                                    
-                                    <rect x="72" y="174" width="110" height="8" rx="4" fill="#F3F4F6"/>
-                                    <rect x="72" y="190" width="90" height="6" rx="3" fill="#F3F4F6" opacity="0.6"/>
-                                    
-                                    <rect x="220" y="174" width="76" height="20" rx="10" fill="#F3F4F6"/>
-                                    <text x="230" y="188" fill="#6B7280" font-family="sans-serif" font-size="10" font-weight="600">Scheduled</text>
-                                </g>
-                                
-                                <!-- Bottom Accent -->
-                                <rect x="24" y="232" width="272" height="12" rx="6" fill="#F9FAFB"/>
-                                <rect x="24" y="232" width="180" height="12" rx="6" fill="#CD6633" opacity="0.1"/>
-                            </svg>
+                    <div>
+                        <div class="p-mockup-card">
+                            <div class="p-mockup-title">Portfolio Analytics</div>
+                            <div class="analytics-bars">
+                                <div class="analytics-bar" style="height: 45%;"></div>
+                                <div class="analytics-bar" style="height: 62%;"></div>
+                                <div class="analytics-bar" style="height: 55%;"></div>
+                                <div class="analytics-bar" style="height: 80%;"></div>
+                                <div class="analytics-bar" style="height: 70%;"></div>
+                                <div class="analytics-bar" style="height: 90%;"></div>
+                                <div class="analytics-bar" style="height: 75%;"></div>
+                            </div>
+                            <div class="analytics-stats">
+                                <div class="analytics-stat">
+                                    <span class="analytics-stat-val">6.2d</span>
+                                    <span class="analytics-stat-label">Avg Turn Time</span>
+                                </div>
+                                <div class="analytics-stat">
+                                    <span class="analytics-stat-val">87%</span>
+                                    <span class="analytics-stat-label">On-Time Rate</span>
+                                </div>
+                                <div class="analytics-stat">
+                                    <span class="analytics-stat-val">94%</span>
+                                    <span class="analytics-stat-label">Acceptance</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="section-transition"></div>
-
-        <!-- Feature Section 2: Real-Time Alerts (Graphic Left, Text Right) -->
-        <section class="operational-feature-section operational-feature-alt" id="real-time-alerts">
-            <div class="operational-feature-container">
-                <div class="operational-feature-content operational-feature-right">
-                    <div class="operational-feature-image">
-                        <!-- Real-Time Alerts Graphic: Dashboard with alerts -->
-                        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="operational-svg">
-                            <!-- Dashboard frame -->
-                            <rect x="40" y="40" width="320" height="320" rx="12" fill="none" stroke="#e5e5e5" stroke-width="2"/>
-                            
-                            <!-- Dashboard header -->
-                            <rect x="40" y="40" width="320" height="50" rx="12" fill="#f8f8f8"/>
-                            <line x1="60" y1="65" x2="340" y2="65" stroke="#e5e5e5" stroke-width="1"/>
-                            
-                            <!-- Alert items -->
-                            <!-- Alert 1: Success (green) -->
-                            <g class="alert-item alert-success">
-                                <rect x="60" y="110" width="280" height="50" rx="6" fill="#f0f9f4" stroke="#4ade80" stroke-width="2"/>
-                                <circle cx="80" cy="135" r="6" fill="#4ade80"/>
-                                <rect x="95" y="125" width="200" height="8" rx="4" fill="#4ade80" opacity="0.6"/>
-                                <rect x="95" y="140" width="150" height="6" rx="3" fill="#4ade80" opacity="0.4"/>
-                                <!-- Checkmark -->
-                                <circle cx="320" cy="135" r="12" fill="#4ade80"/>
-                                <path d="M315 135 L318 138 L325 130" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </g>
-                            
-                            <!-- Alert 2: Warning (orange) -->
-                            <g class="alert-item alert-warning">
-                                <rect x="60" y="180" width="280" height="50" rx="6" fill="#fff7ed" stroke="#CD6633" stroke-width="2"/>
-                                <circle cx="80" cy="205" r="6" fill="#CD6633"/>
-                                <rect x="95" y="195" width="200" height="8" rx="4" fill="#CD6633" opacity="0.6"/>
-                                <rect x="95" y="210" width="180" height="6" rx="3" fill="#CD6633" opacity="0.4"/>
-                                <!-- Warning icon -->
-                                <circle cx="320" cy="205" r="12" fill="#CD6633"/>
-                                <path d="M320 198 L320 212 M320 205 L320 205" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-                            </g>
-                            
-                            <!-- Alert 3: Critical (red) -->
-                            <g class="alert-item alert-critical">
-                                <rect x="60" y="250" width="280" height="50" rx="6" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
-                                <circle cx="80" cy="275" r="6" fill="#ef4444"/>
-                                <rect x="95" y="265" width="200" height="8" rx="4" fill="#ef4444" opacity="0.6"/>
-                                <rect x="95" y="280" width="170" height="6" rx="3" fill="#ef4444" opacity="0.4"/>
-                                <!-- Alert icon -->
-                                <circle cx="320" cy="275" r="12" fill="#ef4444"/>
-                                <path d="M320 268 L320 282 M315 275 L325 275" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
-                            </g>
-                            
-                            <!-- Live indicator pulse -->
-                            <g class="live-indicator">
-                                <circle cx="340" cy="65" r="8" fill="#CD6633">
-                                    <animate attributeName="opacity" values="1;0.5;1" dur="1.2s" repeatCount="indefinite"/>
-                                </circle>
-                                <circle cx="340" cy="65" r="12" stroke="#CD6633" stroke-width="1.5" fill="none" opacity="0.5">
-                                    <animate attributeName="r" values="12;16;12" dur="1.2s" repeatCount="indefinite"/>
-                                    <animate attributeName="opacity" values="0.5;0;0.5" dur="1.2s" repeatCount="indefinite"/>
-                                </circle>
-                            </g>
-                        </svg>
+        <!-- 5. Philosophy Strip -->
+        <section class="p-philosophy">
+            <div class="p-container">
+                <h2 class="p-section-title" style="margin-bottom: 0;">How We Think About This.</h2>
+                <div class="p-philosophy-grid">
+                    <div class="p-philosophy-item">
+                        <strong>No buzzwords.</strong>
+                        <p>Software that reduces real coordination overhead for real teams — not "AI-powered everything."</p>
                     </div>
-                    <div class="operational-feature-text">
-                        <h2 class="operational-section-heading">Real-Time Alerts</h2>
-                        <p class="operational-section-subheading">Know The Moment Something Goes Off Track.</p>
-                        <p class="operational-feature-description">TURN confirms every job with your vendor, follows up on completion, and alerts you instantly when something is delayed or denied. With options to get back on track.</p>
+                    <div class="p-philosophy-item">
+                        <strong>Vendor-first.</strong>
+                        <p>The vendor side has always been an afterthought in property software. TURN was designed from the vendor's perspective out.</p>
+                    </div>
+                    <div class="p-philosophy-item">
+                        <strong>Data as a byproduct.</strong>
+                        <p>TURN captures what's happening automatically. You get real insight without adding steps to your process.</p>
+                    </div>
+                    <div class="p-philosophy-item">
+                        <strong>Accountability both ways.</strong>
+                        <p>Property managers see what vendors are doing. Vendors can prove they delivered.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div class="section-transition"></div>
-
-        <!-- Feature Section 3: Analytics (Text Left, Graphic Right) -->
-        <section class="operational-feature-section" id="community-vendor-analytics">
-            <div class="operational-feature-container">
-                <div class="operational-feature-content operational-feature-left">
-                    <div class="operational-feature-text">
-                        <h2 class="operational-section-heading">Analytics</h2>
-                        <p class="operational-section-subheading">Data That Didn't Exist Before.</p>
-                        <p class="operational-feature-description">Turn times, vendor on-time rates, acceptance rates, and response times across every property in your portfolio. The visibility regionals and ownership need to protect NOI.</p>
-                        <div class="operational-feature-cta">
-                            <a href="#" class="btn btn-primary" data-get-demo>Get Demo</a>
-                        </div>
-                    </div>
-                    <div class="operational-feature-image">
-                        <!-- Analytics Graphic: Charts and metrics -->
-                        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="operational-svg">
-                            <!-- Main chart container -->
-                            <rect x="40" y="40" width="320" height="200" rx="12" fill="none" stroke="#e5e5e5" stroke-width="2"/>
-                            
-                            <!-- Grid lines -->
-                            <line x1="40" y1="120" x2="360" y2="120" stroke="#f5f5f5" stroke-width="1"/>
-                            <line x1="40" y1="180" x2="360" y2="180" stroke="#f5f5f5" stroke-width="1"/>
-                            
-                            <!-- Bar chart bars -->
-                            <rect x="70" y="160" width="30" height="60" rx="4" fill="#CD6633" opacity="0.7"/>
-                            <rect x="120" y="140" width="30" height="80" rx="4" fill="#CD6633" opacity="0.8"/>
-                            <rect x="170" y="110" width="30" height="110" rx="4" fill="#CD6633"/>
-                            <rect x="220" y="90" width="30" height="130" rx="4" fill="#CD6633" opacity="0.9"/>
-                            <rect x="270" y="100" width="30" height="120" rx="4" fill="#CD6633" opacity="0.85"/>
-                            
-                            <!-- Trend line -->
-                            <path d="M85 160 L135 140 L185 110 L235 90 L285 100" stroke="#CD6633" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                            
-                            <!-- Data points -->
-                            <circle cx="85" cy="160" r="4" fill="#ffffff" stroke="#CD6633" stroke-width="2"/>
-                            <circle cx="135" cy="140" r="4" fill="#ffffff" stroke="#CD6633" stroke-width="2"/>
-                            <circle cx="185" cy="110" r="4" fill="#ffffff" stroke="#CD6633" stroke-width="2"/>
-                            <circle cx="235" cy="90" r="4" fill="#ffffff" stroke="#CD6633" stroke-width="2"/>
-                            <circle cx="285" cy="100" r="4" fill="#ffffff" stroke="#CD6633" stroke-width="2"/>
-                            
-                            <!-- Upward trend arrow -->
-                            <g class="trend-arrow">
-                                <path d="M310 95 L320 80 L330 95" stroke="#CD6633" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                                <line x1="320" y1="80" x2="320" y2="105" stroke="#CD6633" stroke-width="3" stroke-linecap="round"/>
-                            </g>
-                            
-                            <!-- Metric cards below chart -->
-                            <!-- Card 1: NOI -->
-                            <rect x="40" y="260" width="100" height="80" rx="8" fill="#f8f8f8" stroke="#e5e5e5" stroke-width="1.5"/>
-                            <rect x="50" y="270" width="30" height="8" rx="4" fill="#CD6633" opacity="0.6"/>
-                            <rect x="50" y="285" width="80" height="12" rx="2" fill="#CD6633"/>
-                            <rect x="50" y="305" width="60" height="6" rx="3" fill="#999" opacity="0.5"/>
-                            
-                            <!-- Card 2: Vendor Performance -->
-                            <rect x="150" y="260" width="100" height="80" rx="8" fill="#f8f8f8" stroke="#e5e5e5" stroke-width="1.5"/>
-                            <rect x="160" y="270" width="30" height="8" rx="4" fill="#CD6633" opacity="0.6"/>
-                            <rect x="160" y="285" width="80" height="12" rx="2" fill="#CD6633"/>
-                            <rect x="160" y="305" width="70" height="6" rx="3" fill="#999" opacity="0.5"/>
-                            
-                            <!-- Card 3: Community Stats -->
-                            <rect x="260" y="260" width="100" height="80" rx="8" fill="#f8f8f8" stroke="#e5e5e5" stroke-width="1.5"/>
-                            <rect x="270" y="270" width="30" height="8" rx="4" fill="#CD6633" opacity="0.6"/>
-                            <rect x="270" y="285" width="80" height="12" rx="2" fill="#CD6633"/>
-                            <rect x="270" y="305" width="65" height="6" rx="3" fill="#999" opacity="0.5"/>
-                        </svg>
-                    </div>
-                </div>
+        <!-- 6. Bottom CTA -->
+        <section class="p-cta-section">
+            <div class="p-container">
+                <h2 class="p-cta-title">Ready to see it in action?</h2>
+                <p class="p-cta-sub">Book a 20-minute walkthrough. No slides. Just the product.</p>
+                <a href="#" class="btn btn-primary" style="font-size: 1rem; padding: 0.875rem 2.5rem;" data-get-demo>Schedule a Demo</a>
             </div>
         </section>
+
     </main>
 
     <footer class="footer">
@@ -328,57 +1079,47 @@
                 <div class="footer-logo">
                     <a href="index.html">turn</a>
                 </div>
-                
             </div>
-
             <nav class="footer-nav">
                 <a href="index.html#home" class="footer-link">Home</a>
                 <a href="about.html" class="footer-link">About</a>
-                <a href="features.html" class="footer-link">Features</a>
+                <a href="features.html" class="footer-link">Platform</a>
                 <a href="contact.html" class="footer-link">Contact</a>
             </nav>
-
             <div class="footer-copyright">
                 <p>&copy; 2026 TURN. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Get Demo Page (formerly Join Waitlist) -->
+    <!-- Get Demo Overlay -->
     <div class="join-waitlist-page" id="joinWaitlistPage" aria-hidden="true">
         <div class="join-waitlist-content">
             <h1 class="join-waitlist-title">Get Demo</h1>
             <p class="join-waitlist-subtitle">Fill out the form below to request a demo, and we'll get back to you.</p>
-            
             <form class="join-waitlist-form" id="joinWaitlistForm">
                 <div class="form-group">
                     <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" name="fullName" placeholder="Enter first & last name" required class="join-waitlist-input">
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter first &amp; last name" required class="join-waitlist-input">
                 </div>
-                
                 <div class="form-group">
                     <label for="emailAddress">Email Address</label>
                     <input type="email" id="emailAddress" name="emailAddress" placeholder="Enter your work email" required class="join-waitlist-input">
                 </div>
-                
                 <div class="form-group">
                     <label for="phoneNumber">Phone Number</label>
                     <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" class="join-waitlist-input">
                 </div>
-                
                 <div class="form-group">
                     <label for="company">Company</label>
                     <input type="text" id="company" name="company" placeholder="Enter your company" class="join-waitlist-input">
                 </div>
-                
                 <div class="form-group">
                     <label for="message">Message</label>
                     <textarea id="message" name="message" placeholder="Type your message..." rows="4" class="join-waitlist-textarea"></textarea>
                 </div>
-                
                 <button type="submit" class="join-waitlist-submit">Request Demo</button>
             </form>
-            
             <div class="join-waitlist-footer-line"></div>
         </div>
     </div>
@@ -388,4 +1129,3 @@
     <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
-
