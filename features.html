@@ -7,53 +7,77 @@
     <title>Platform — Turn</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css?v=1738275600">
     <style>
-        /* ─── Hero board mockup ─────────────────────────────── */
-        .plat-hero {
-            padding: 5rem 3rem 4.5rem;
-            background: var(--bg-white);
+        :root {
+            --p-bg: #FAF9F7;
+            --p-surface: #ffffff;
+            --p-border: rgba(0,0,0,0.08);
+            --p-accent: #CD6633;
+            --p-text: #1a1a1a;
+            --p-muted: #555555;
+            --p-light: #888888;
+            --p-tag-bg: rgba(205,102,51,0.08);
+            --p-strip: #F2EDE8;
+            --p-font: 'Inter', system-ui, sans-serif;
+            --p-display: Georgia, 'Times New Roman', serif;
         }
 
-        .plat-hero-inner {
+        .platform-page {
+            background: var(--p-bg);
+            font-family: var(--p-font);
+            color: var(--p-text);
+        }
+
+        .p-container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* ── Hero ── */
+        .p-hero {
+            padding: 5rem 0 4.5rem;
+            background: var(--p-bg);
+        }
+
+        .p-hero-inner {
             display: grid;
-            grid-template-columns: 1fr 1.15fr;
+            grid-template-columns: 1fr 1.1fr;
             gap: 4rem;
             align-items: center;
         }
 
-        .plat-hero-title {
-            font-family: var(--font-display);
+        .p-hero-title {
+            font-family: var(--p-display);
             font-size: clamp(2.5rem, 4.5vw, 3.75rem);
             font-weight: 400;
             line-height: 1.15;
-            color: var(--text-dark);
+            color: var(--p-text);
             margin-bottom: 1.25rem;
         }
 
-        .plat-hero-sub {
+        .p-hero-sub {
             font-size: 1.1rem;
-            color: var(--text-light);
+            color: var(--p-muted);
             line-height: 1.75;
             margin-bottom: 2rem;
-            font-family: var(--font-sans);
             max-width: 460px;
         }
 
+        /* Board Mockup */
         .board-mockup {
-            background: var(--bg-white);
-            border: 1px solid rgba(0,0,0,0.08);
+            background: #fff;
+            border: 1px solid var(--p-border);
             border-radius: 12px;
-            box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 40px rgba(0,0,0,0.09);
             overflow: hidden;
         }
 
         .board-mockup-header {
             background: #f8f7f5;
-            border-bottom: 1px solid rgba(0,0,0,0.07);
+            border-bottom: 1px solid var(--p-border);
             padding: 0.65rem 1rem;
             display: flex;
             align-items: center;
@@ -68,9 +92,9 @@
         .board-title-bar {
             font-size: 12px;
             font-weight: 600;
-            color: #888;
+            color: var(--p-light);
             margin-left: 6px;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
         .board-body { padding: 1rem; }
@@ -88,19 +112,17 @@
             font-weight: 600;
             letter-spacing: 0.06em;
             text-transform: uppercase;
-            color: #999;
+            color: var(--p-light);
             padding: 0 4px;
-            font-family: var(--font-sans);
         }
 
         .board-unit-label {
             font-size: 11px;
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--p-text);
             padding: 6px 4px;
             display: flex;
             align-items: center;
-            font-family: var(--font-sans);
         }
 
         .board-cell {
@@ -111,45 +133,50 @@
             justify-content: center;
             font-size: 9px;
             font-weight: 600;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
         .cell-completed  { background: #e8f5e9; color: #2e7d32; }
-        .cell-inprogress { background: #fff3e0; color: var(--turn-brown); }
+        .cell-inprogress { background: #fff3e0; color: #CD6633; }
         .cell-scheduled  { background: #e3f0ff; color: #1565c0; }
         .cell-unscheduled{ background: #f5f5f5; color: #bbb; border: 1px solid #eee; }
         .cell-rejected   { background: #fdecea; color: #c62828; }
 
-        /* ─── Flow section ──────────────────────────────────── */
-        .plat-flow-section {
-            padding: 5rem 3rem;
-            background: #fafafa;
-            border-top: 1px solid rgba(0,0,0,0.07);
-            border-bottom: 1px solid rgba(0,0,0,0.07);
+        /* ── How It Works ── */
+        .p-flow-section {
+            padding: 6rem 0;
+            background: var(--p-surface);
+            border-top: 1px solid var(--p-border);
         }
 
-        .plat-flow-inner {
-            max-width: 1200px;
-            margin: 0 auto;
+        .p-section-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--p-accent);
+            margin-bottom: 0.6rem;
+            font-family: var(--p-font);
         }
 
-        .plat-flow-title {
-            font-family: var(--font-display);
+        .p-section-title {
+            font-family: var(--p-display);
             font-size: clamp(1.75rem, 3vw, 2.5rem);
             font-weight: 400;
-            color: var(--text-dark);
+            color: var(--p-text);
             line-height: 1.25;
             margin-bottom: 3.5rem;
         }
 
-        .plat-flow-grid {
+        .flow-steps {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
+            gap: 0;
             position: relative;
             margin-bottom: 3rem;
         }
 
-        .plat-flow-step {
+        .flow-step {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -158,7 +185,7 @@
             padding: 0 0.5rem;
         }
 
-        .plat-flow-step:not(:last-child)::after {
+        .flow-step:not(:last-child)::after {
             content: '';
             position: absolute;
             top: 19px;
@@ -166,244 +193,316 @@
             width: 100%;
             height: 1px;
             background: linear-gradient(90deg, rgba(205,102,51,0.4), rgba(205,102,51,0.1));
+            z-index: 0;
         }
 
-        .plat-flow-circle {
+        .flow-icon {
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background: rgba(205,102,51,0.08);
+            background: var(--p-tag-bg);
             border: 1.5px solid rgba(205,102,51,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--turn-brown);
+            font-size: 15px;
             margin-bottom: 0.75rem;
             position: relative;
             z-index: 1;
-            font-family: var(--font-sans);
             flex-shrink: 0;
         }
 
-        .plat-flow-label {
+        .flow-step-num {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--p-accent);
+            margin-bottom: 0.35rem;
+            font-family: var(--p-font);
+        }
+
+        .flow-step-title {
             font-size: 12px;
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--p-text);
             margin-bottom: 0.35rem;
             line-height: 1.35;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
-        .plat-flow-desc {
+        .flow-step-desc {
             font-size: 11px;
-            color: var(--text-light);
+            color: var(--p-muted);
             line-height: 1.55;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
-        /* Pullquote matching about.html style */
-        .plat-pullquote {
-            margin: 0;
-            padding: 1.25rem 1.5rem;
-            border-left: 2px solid var(--turn-brown);
-            background: rgba(205, 102, 51, 0.06);
-        }
-
-        .plat-pullquote p {
-            font-family: var(--font-display);
+        .flow-callout {
+            background: var(--p-tag-bg);
+            border-left: 3px solid var(--p-accent);
+            border-radius: 0 8px 8px 0;
+            padding: 1.25rem 1.75rem;
+            font-family: var(--p-display);
             font-style: italic;
-            font-size: 1.0625rem;
-            color: var(--text-dark);
+            font-size: 1.05rem;
+            color: var(--p-text);
             line-height: 1.65;
-            margin: 0;
+            max-width: 720px;
         }
 
-        /* ─── Roles section overrides ───────────────────────── */
-        .plat-roles-section {
-            padding: 5rem 3rem;
-            background: var(--bg-white);
+        /* ── Three Roles ── */
+        .p-roles-section {
+            padding: 6rem 0;
+            background: var(--p-bg);
+            border-top: 1px solid var(--p-border);
         }
 
-        .plat-roles-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .plat-roles-title {
-            font-family: var(--font-display);
-            font-size: clamp(1.75rem, 3vw, 2.5rem);
-            font-weight: 400;
-            color: var(--text-dark);
-            line-height: 1.25;
-            margin-bottom: 2.5rem;
-        }
-
-        .plat-roles-grid {
+        .p-roles-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1.5rem;
+            margin-top: 0;
         }
 
-        /* Tag pills */
-        .plat-tags {
+        .p-role-card {
+            background: var(--p-surface);
+            border: 1px solid var(--p-border);
+            border-radius: 12px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .p-role-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--p-accent);
+            opacity: 0.35;
+        }
+
+        .p-role-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--p-tag-bg);
+            border-radius: 10px;
             display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 1.25rem;
+            align-items: center;
             justify-content: center;
+            font-size: 20px;
+            margin-bottom: 1.25rem;
         }
 
-        .plat-tag {
+        .p-role-title {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--p-text);
+            margin-bottom: 0.65rem;
+            font-family: var(--p-font);
+        }
+
+        .p-role-body {
+            font-size: 0.9rem;
+            color: var(--p-muted);
+            line-height: 1.75;
+            margin-bottom: 1.25rem;
+            font-family: var(--p-font);
+        }
+
+        .p-role-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+        .p-tag {
             font-size: 11px;
             font-weight: 500;
-            color: var(--turn-brown);
-            background: rgba(205,102,51,0.08);
+            color: var(--p-accent);
+            background: var(--p-tag-bg);
             border: 1px solid rgba(205,102,51,0.15);
             border-radius: 100px;
             padding: 3px 10px;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
-        /* ─── Feature text alignment override ──────────────── */
-        /* existing .operational-feature-text is text-align: center;
-           !important needed because global CSS has ID-based overrides
-           (#real-time-alerts sets text-align: right) */
-        .plat-feature-text {
-            text-align: left !important;
-        }
-        .plat-feature-text * {
-            text-align: left !important;
+        /* ── Feature Deep-Dives ── */
+        .p-feature-section {
+            padding: 5.5rem 0;
+            border-top: 1px solid var(--p-border);
         }
 
-        /* ─── Feature mockup cards ──────────────────────────── */
-        .plat-mockup-card {
-            background: var(--bg-white);
-            border: 1px solid rgba(0,0,0,0.08);
+        .p-feature-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4.5rem;
+            align-items: center;
+        }
+
+        .p-feature-inner.reverse {
+            direction: rtl;
+        }
+        .p-feature-inner.reverse > * { direction: ltr; }
+
+        .p-feature-label {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--p-accent);
+            margin-bottom: 0.6rem;
+            font-family: var(--p-font);
+        }
+
+        .p-feature-heading {
+            font-family: var(--p-display);
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 400;
+            color: var(--p-text);
+            line-height: 1.25;
+            margin-bottom: 0.45rem;
+        }
+
+        .p-feature-subheading {
+            font-family: var(--p-display);
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--p-light);
+            margin-bottom: 1.25rem;
+            line-height: 1.5;
+        }
+
+        .p-feature-body {
+            font-size: 0.95rem;
+            color: var(--p-muted);
+            line-height: 1.85;
+            font-family: var(--p-font);
+        }
+
+        /* Mockup cards */
+        .p-mockup-card {
+            background: #fff;
+            border: 1px solid var(--p-border);
             border-radius: 12px;
             box-shadow: 0 4px 24px rgba(0,0,0,0.06);
             padding: 1.5rem;
         }
 
-        .plat-mockup-label {
-            font-size: 10px;
+        .p-mockup-title {
+            font-size: 11px;
             font-weight: 600;
-            color: #999;
+            color: var(--p-light);
             text-transform: uppercase;
             letter-spacing: 0.08em;
             margin-bottom: 1.25rem;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
-        /* Unit task list mockup */
-        .plat-task-list { display: flex; flex-direction: column; gap: 8px; }
+        /* Kanban */
+        .kanban-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 
-        .plat-task-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 10px 12px;
-            background: #fafafa;
-            border: 1px solid rgba(0,0,0,0.06);
-            border-radius: 8px;
-        }
-
-        .plat-task-name {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-dark);
-            font-family: var(--font-sans);
-        }
-
-        .plat-badge {
+        .kanban-col-header {
             font-size: 10px;
             font-weight: 600;
-            border-radius: 100px;
-            padding: 3px 9px;
-            font-family: var(--font-sans);
+            color: var(--p-light);
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            margin-bottom: 8px;
+            text-align: center;
+            font-family: var(--p-font);
         }
 
-        .badge-complete   { background: #e8f5e9; color: #2e7d32; }
-        .badge-inprogress { background: #fff3e0; color: var(--turn-brown); }
-        .badge-scheduled  { background: #e3f0ff; color: #1565c0; }
-
-        /* Email job card mockup */
-        .plat-email-card {
-            background: var(--bg-white);
-            border: 1px solid rgba(0,0,0,0.08);
-            border-radius: 12px;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
-            overflow: hidden;
+        .kanban-card {
+            background: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 7px;
+            padding: 8px 10px;
+            margin-bottom: 7px;
         }
 
-        .plat-email-topbar {
-            background: #f8f7f5;
-            border-bottom: 1px solid rgba(0,0,0,0.07);
-            padding: 0.65rem 1.25rem;
+        .kanban-unit {
             font-size: 11px;
             font-weight: 600;
-            color: #888;
-            font-family: var(--font-sans);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            color: var(--p-text);
+            margin-bottom: 4px;
+            font-family: var(--p-font);
         }
 
-        .plat-email-topbar-dot {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--turn-brown);
+        .kanban-status {
+            font-size: 9px;
+            font-weight: 600;
+            border-radius: 100px;
+            padding: 2px 7px;
+            display: inline-block;
+            font-family: var(--p-font);
         }
 
-        .plat-email-body { padding: 1.25rem; }
+        .ks-scheduled  { background: #e3f0ff; color: #1565c0; }
+        .ks-inprogress { background: #fff3e0; color: #CD6633; }
+        .ks-completed  { background: #e8f5e9; color: #2e7d32; }
 
-        .plat-email-subject {
+        /* Mobile job card */
+        .mobile-frame {
+            background: #1a1a1a;
+            border-radius: 28px;
+            padding: 5px;
+            max-width: 240px;
+            margin: 0 auto;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .mobile-screen {
+            background: #fff;
+            border-radius: 23px;
+            padding: 1.25rem;
+        }
+
+        .mobile-job-badge {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--p-accent);
+            background: var(--p-tag-bg);
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+            font-family: var(--p-font);
+        }
+
+        .mobile-job-title {
             font-size: 14px;
-            font-weight: 600;
-            color: var(--text-dark);
-            margin-bottom: 1rem;
-            font-family: var(--font-sans);
+            font-weight: 700;
+            color: var(--p-text);
+            margin-bottom: 6px;
+            font-family: var(--p-font);
         }
 
-        .plat-email-detail {
-            font-size: 12px;
-            color: var(--text-light);
-            margin-bottom: 5px;
-            font-family: var(--font-sans);
-            display: flex;
-            gap: 0.5rem;
+        .mobile-job-detail {
+            font-size: 11px;
+            color: var(--p-muted);
+            margin-bottom: 4px;
+            font-family: var(--p-font);
         }
 
-        .plat-email-detail-label {
-            font-weight: 600;
-            color: var(--text-dark);
-            min-width: 60px;
-        }
+        .mobile-job-divider { height: 1px; background: #f0f0f0; margin: 0.85rem 0; }
 
-        .plat-email-divider {
-            height: 1px;
-            background: rgba(0,0,0,0.07);
-            margin: 1rem 0;
-        }
-
-        .plat-email-btns { display: flex; gap: 8px; }
-
-        .plat-email-btn {
-            padding: 8px 16px;
-            border-radius: 6px;
+        .mobile-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 9px;
+            border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
-            font-family: var(--font-sans);
+            margin-bottom: 6px;
+            font-family: var(--p-font);
         }
 
-        .plat-email-btn-primary { background: var(--turn-brown); color: #fff; }
-        .plat-email-btn-secondary { background: #f0f0f0; color: var(--text-dark); }
+        .mobile-btn-primary  { background: var(--p-accent); color: #fff; }
+        .mobile-btn-secondary{ background: #f5f5f5; color: var(--p-text); }
 
-        /* Alert list mockup */
-        .plat-alert-list { display: flex; flex-direction: column; gap: 8px; }
+        /* Alerts */
+        .alert-list { display: flex; flex-direction: column; gap: 8px; }
 
-        .plat-alert-row {
+        .alert-item {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -411,136 +510,165 @@
             border-radius: 8px;
         }
 
-        .plat-alert-icon { font-size: 14px; flex-shrink: 0; }
-        .plat-alert-text { flex: 1; }
+        .alert-icon { font-size: 14px; flex-shrink: 0; }
+        .alert-text { flex: 1; }
 
-        .plat-alert-unit {
+        .alert-unit {
             font-weight: 600;
-            color: var(--text-dark);
+            color: var(--p-text);
             display: block;
             font-size: 12px;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
-        .plat-alert-sub {
-            color: #777;
+        .alert-desc {
+            color: var(--p-muted);
             font-size: 11px;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
-        .plat-alert-success { background: #f0fdf4; border: 1px solid #bbf7d0; }
-        .plat-alert-warning { background: #fff7ed; border: 1px solid #fed7aa; }
-        .plat-alert-neutral { background: #f8f8f8; border: 1px solid #e5e5e5; }
-        .plat-alert-danger  { background: #fef2f2; border: 1px solid #fecaca; }
+        .alert-success { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .alert-warning { background: #fff7ed; border: 1px solid #fed7aa; }
+        .alert-info    { background: #f0f9ff; border: 1px solid #bae6fd; }
 
-        .plat-alert-action {
+        .alert-action-btn {
             font-size: 10px;
             font-weight: 600;
-            color: var(--turn-brown);
-            background: rgba(205,102,51,0.1);
+            color: var(--p-accent);
+            background: var(--p-tag-bg);
             padding: 4px 9px;
             border-radius: 5px;
             white-space: nowrap;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
-        /* Analytics mockup */
-        .plat-analytics-bars {
+        /* Analytics */
+        .analytics-bars {
             display: flex;
             align-items: flex-end;
             gap: 8px;
             height: 80px;
             margin-bottom: 1.25rem;
             padding: 0 2px;
-            border-bottom: 1px solid rgba(0,0,0,0.07);
+            border-bottom: 1px solid #f0f0f0;
         }
 
-        .plat-analytics-bar {
+        .analytics-bar {
             flex: 1;
-            background: linear-gradient(to top, var(--turn-brown), rgba(205,102,51,0.45));
+            background: linear-gradient(to top, var(--p-accent), rgba(205,102,51,0.45));
             border-radius: 4px 4px 0 0;
         }
 
-        .plat-analytics-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+        .analytics-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
 
-        .plat-analytics-stat {
+        .analytics-stat {
             background: #faf9f7;
-            border: 1px solid rgba(0,0,0,0.07);
+            border: 1px solid #eee;
             border-radius: 8px;
             padding: 10px;
             text-align: center;
         }
 
-        .plat-analytics-val {
+        .analytics-stat-val {
             font-size: 17px;
             font-weight: 700;
-            color: var(--turn-brown);
+            color: var(--p-accent);
             display: block;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
-        .plat-analytics-lbl {
+        .analytics-stat-label {
             font-size: 9px;
-            color: #999;
+            color: var(--p-light);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            font-family: var(--font-sans);
+            font-family: var(--p-font);
         }
 
-        /* ─── Bottom CTA ────────────────────────────────────── */
-        .plat-cta-section {
-            padding: 7rem 3rem;
+        /* ── Philosophy ── */
+        .p-philosophy {
+            background: var(--p-strip);
+            padding: 5.5rem 0;
+            border-top: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .p-philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .p-philosophy-item strong {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--p-text);
+            margin-bottom: 0.5rem;
+            font-family: var(--p-font);
+        }
+
+        .p-philosophy-item p {
+            font-size: 0.875rem;
+            color: var(--p-muted);
+            line-height: 1.75;
+            font-family: var(--p-font);
+        }
+
+        /* ── Bottom CTA ── */
+        .p-cta-section {
+            padding: 7rem 0;
             text-align: center;
-            background: var(--bg-white);
-            border-top: 1px solid rgba(0,0,0,0.07);
+            background: var(--p-bg);
         }
 
-        .plat-cta-title {
-            font-family: var(--font-display);
+        .p-cta-title {
+            font-family: var(--p-display);
             font-size: clamp(2rem, 4vw, 3rem);
             font-weight: 400;
-            color: var(--text-dark);
+            color: var(--p-text);
             margin-bottom: 0.85rem;
         }
 
-        .plat-cta-sub {
+        .p-cta-sub {
             font-size: 1.05rem;
-            color: var(--text-light);
+            color: var(--p-muted);
             margin-bottom: 2.5rem;
             font-style: italic;
-            font-family: var(--font-display);
+            font-family: var(--p-display);
         }
 
-        /* ─── Responsive ────────────────────────────────────── */
+        /* ── Responsive ── */
         @media (max-width: 1024px) {
-            .plat-flow-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-            .plat-flow-step:not(:last-child)::after { display: none; }
+            .flow-steps { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+            .flow-step:not(:last-child)::after { display: none; }
+            .p-philosophy-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .plat-hero-inner { grid-template-columns: 1fr; }
-            .plat-hero { padding: 3rem 1.25rem 2.5rem; }
-            .plat-flow-section,
-            .plat-roles-section,
-            .plat-cta-section { padding-left: 1.25rem; padding-right: 1.25rem; }
-            .plat-flow-grid { grid-template-columns: 1fr; gap: 1.75rem; }
-            .plat-flow-step {
-                align-items: flex-start;
-                text-align: left;
-                flex-direction: row;
-                gap: 1rem;
-            }
-            .plat-flow-circle { flex-shrink: 0; margin-bottom: 0; }
-            .plat-roles-grid { grid-template-columns: 1fr; }
+            .p-hero-inner,
+            .p-feature-inner { grid-template-columns: 1fr; direction: ltr; }
+            .p-feature-inner.reverse { direction: ltr; }
+            .p-roles-grid { grid-template-columns: 1fr; }
+            .flow-steps { grid-template-columns: 1fr; gap: 1.75rem; }
+            .flow-step { align-items: flex-start; text-align: left; flex-direction: row; gap: 1rem; }
+            .flow-icon { flex-shrink: 0; margin-bottom: 0; }
+            .p-hero { padding: 3rem 0 2.5rem; }
+            .p-flow-section,
+            .p-roles-section,
+            .p-feature-section { padding: 4rem 0; }
+            .kanban-cols { grid-template-columns: 1fr; }
+            .analytics-stats { grid-template-columns: repeat(3, 1fr); }
+            .p-philosophy-grid { grid-template-columns: 1fr; }
             .board-col-headers,
             .board-row { grid-template-columns: 1fr repeat(3, 1fr); }
             .board-col-label:nth-child(n+5),
             .board-cell:nth-child(n+5) { display: none; }
-            .plat-analytics-stats { grid-template-columns: repeat(3, 1fr); }
         }
 
         @media (max-width: 480px) {
-            .plat-analytics-stats { grid-template-columns: 1fr; }
+            .p-container { padding: 0 1.25rem; }
+            .analytics-stats { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -570,203 +698,73 @@
         </nav>
     </header>
 
-    <main>
+    <main class="platform-page">
 
-        <!-- 1. Hero ─────────────────────────────────────────── -->
-        <section class="plat-hero">
-            <div class="plat-hero-inner">
-                <div>
-                    <h1 class="plat-hero-title">The Make-Ready Platform.</h1>
-                    <p class="plat-hero-sub">One system for property managers, regionals, and vendors — built around the unit turn.</p>
-                    <a href="#" class="btn btn-primary" data-get-demo>Schedule a Demo</a>
-                </div>
-                <div>
-                    <div class="board-mockup">
-                        <div class="board-mockup-header">
-                            <div class="board-dot"></div>
-                            <div class="board-dot"></div>
-                            <div class="board-dot"></div>
-                            <span class="board-title-bar">Make-Ready Board</span>
-                        </div>
-                        <div class="board-body">
-                            <div class="board-col-headers">
-                                <div class="board-col-label">Unit</div>
-                                <div class="board-col-label">Cleaning</div>
-                                <div class="board-col-label">Painting</div>
-                                <div class="board-col-label">Carpet</div>
-                                <div class="board-col-label">Inspect</div>
-                                <div class="board-col-label">Move-In</div>
+        <!-- 1. Hero -->
+        <section class="p-hero">
+            <div class="p-container">
+                <div class="p-hero-inner">
+                    <div>
+                        <h1 class="p-hero-title">The Make-Ready Platform.</h1>
+                        <p class="p-hero-sub">One system for property managers, regionals, and vendors — built around the unit turn.</p>
+                        <a href="#" class="btn btn-primary" data-get-demo>Schedule a Demo</a>
+                    </div>
+                    <div>
+                        <div class="board-mockup">
+                            <div class="board-mockup-header">
+                                <div class="board-dot"></div>
+                                <div class="board-dot"></div>
+                                <div class="board-dot"></div>
+                                <span class="board-title-bar">Make-Ready Board</span>
                             </div>
-                            <div class="board-row">
-                                <div class="board-unit-label">TG-1</div>
-                                <div class="board-cell cell-completed">Done</div>
-                                <div class="board-cell cell-inprogress">Apr 6</div>
-                                <div class="board-cell cell-scheduled">Apr 8</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-scheduled">May 1</div>
-                            </div>
-                            <div class="board-row">
-                                <div class="board-unit-label">SH-01</div>
-                                <div class="board-cell cell-inprogress">Apr 5</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-scheduled">May 13</div>
-                            </div>
-                            <div class="board-row">
-                                <div class="board-unit-label">Unit 100</div>
-                                <div class="board-cell cell-completed">Done</div>
-                                <div class="board-cell cell-rejected">Rejected</div>
-                                <div class="board-cell cell-rejected">Rejected</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-scheduled">Apr 10</div>
-                            </div>
-                            <div class="board-row">
-                                <div class="board-unit-label">MG-01</div>
-                                <div class="board-cell cell-scheduled">Apr 7</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-scheduled">Apr 9</div>
-                            </div>
-                            <div class="board-row">
-                                <div class="board-unit-label">3000</div>
-                                <div class="board-cell cell-completed">Done</div>
-                                <div class="board-cell cell-inprogress">Apr 6</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-unscheduled">—</div>
-                                <div class="board-cell cell-scheduled">Apr 16</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. How a Turn Works in TURN ─────────────────────── -->
-        <section class="plat-flow-section">
-            <div class="plat-flow-inner">
-                <h2 class="plat-flow-title">How a Turn Works in TURN.</h2>
-                <div class="plat-flow-grid">
-                    <div class="plat-flow-step">
-                        <div class="plat-flow-circle">01</div>
-                        <div>
-                            <div class="plat-flow-label">Move-Out Logged</div>
-                            <div class="plat-flow-desc">A unit is flagged as vacant. The turn clock starts.</div>
-                        </div>
-                    </div>
-                    <div class="plat-flow-step">
-                        <div class="plat-flow-circle">02</div>
-                        <div>
-                            <div class="plat-flow-label">Scope Set</div>
-                            <div class="plat-flow-desc">Property manager builds the make-ready checklist: cleaning, paint, carpet, appliances.</div>
-                        </div>
-                    </div>
-                    <div class="plat-flow-step">
-                        <div class="plat-flow-circle">03</div>
-                        <div>
-                            <div class="plat-flow-label">Vendors Assigned</div>
-                            <div class="plat-flow-desc">Each job is dispatched to the right vendor, who gets notified by email instantly.</div>
-                        </div>
-                    </div>
-                    <div class="plat-flow-step">
-                        <div class="plat-flow-circle">04</div>
-                        <div>
-                            <div class="plat-flow-label">Vendors Confirm</div>
-                            <div class="plat-flow-desc">Vendors accept the job, confirm timing, and update when the work is done.</div>
-                        </div>
-                    </div>
-                    <div class="plat-flow-step">
-                        <div class="plat-flow-circle">05</div>
-                        <div>
-                            <div class="plat-flow-label">Completion Verified</div>
-                            <div class="plat-flow-desc">TURN captures proof of completion and updates the board automatically.</div>
-                        </div>
-                    </div>
-                    <div class="plat-flow-step">
-                        <div class="plat-flow-circle">06</div>
-                        <div>
-                            <div class="plat-flow-label">Unit Cleared</div>
-                            <div class="plat-flow-desc">Property manager sees the unit is move-in ready. Leasing can proceed.</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="plat-pullquote">
-                    <p>"Every step is visible to the right person at the right time — without anyone chasing an update."</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Three Roles. One Platform. ───────────────────── -->
-        <section class="plat-roles-section">
-            <div class="plat-roles-inner">
-                <h2 class="plat-roles-title">Three Roles. One Platform.</h2>
-                <div class="plat-roles-grid">
-
-                    <div class="pillar-card" style="text-align: left; align-items: flex-start;">
-                        <h3 class="pillar-heading" style="text-align: left; min-height: auto;">Property Managers</h3>
-                        <p class="pillar-description" style="text-align: left; margin-left: 0; margin-right: 0; max-width: none;">Schedule every vendor step, confirm completions, and run the full make-ready from a single board. The coordination overhead that used to eat your day disappears.</p>
-                        <div class="plat-tags">
-                            <span class="plat-tag">Vendor Scheduling</span>
-                            <span class="plat-tag">Completion Tracking</span>
-                            <span class="plat-tag">Unit Board</span>
-                            <span class="plat-tag">Vendor Analytics</span>
-                        </div>
-                    </div>
-
-                    <div class="pillar-card" style="text-align: left; align-items: flex-start;">
-                        <h3 class="pillar-heading" style="text-align: left; min-height: auto;">Regionals &amp; Ownership</h3>
-                        <p class="pillar-description" style="text-align: left; margin-left: 0; margin-right: 0; max-width: none;">See turn times, vendor performance, and unit status across your entire portfolio in real time. The visibility that lets you protect NOI and hold properties accountable.</p>
-                        <div class="plat-tags">
-                            <span class="plat-tag">Portfolio View</span>
-                            <span class="plat-tag">Property Analytics</span>
-                            <span class="plat-tag">Vendor Insights</span>
-                        </div>
-                    </div>
-
-                    <div class="pillar-card" style="text-align: left; align-items: flex-start;">
-                        <h3 class="pillar-heading" style="text-align: left; min-height: auto;">Vendors</h3>
-                        <p class="pillar-description" style="text-align: left; margin-left: 0; margin-right: 0; max-width: none;">Get job assignments by email, confirm your schedule, and update the property team when work is done. Clear, simple, and built around how vendors actually work.</p>
-                        <div class="plat-tags">
-                            <span class="plat-tag">Email Dispatch</span>
-                            <span class="plat-tag">Schedule Validation</span>
-                            <span class="plat-tag">Performance Metrics</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- 4a. Make-Ready Board ─────────────────────────────── -->
-        <section class="operational-feature-section" id="operational-efficiency">
-            <div class="operational-feature-container">
-                <div class="operational-feature-content operational-feature-left">
-                    <div class="operational-feature-text plat-feature-text">
-                        <p class="section-eyebrow">Operational Efficiency</p>
-                        <h2 class="operational-section-heading">Your entire make-ready. In one place.</h2>
-                        <p class="operational-section-subheading">No more spreadsheets, whiteboards, texts, and calls.</p>
-                        <p class="operational-feature-description">Schedule every vendor step for a unit and watch your board update automatically as work gets done. Each unit shows its current status, what's pending, and who's responsible — without you having to ask. When a unit's ready, you'll know before you think to check.</p>
-                    </div>
-                    <div class="operational-feature-image">
-                        <div class="plat-mockup-card">
-                            <div class="plat-mockup-label">Unit 311 — Make-Ready Tasks</div>
-                            <div class="plat-task-list">
-                                <div class="plat-task-row">
-                                    <span class="plat-task-name">Cleaning</span>
-                                    <span class="plat-badge badge-complete">Complete</span>
+                            <div class="board-body">
+                                <div class="board-col-headers">
+                                    <div class="board-col-label">Unit</div>
+                                    <div class="board-col-label">Cleaning</div>
+                                    <div class="board-col-label">Painting</div>
+                                    <div class="board-col-label">Carpet</div>
+                                    <div class="board-col-label">Inspect</div>
+                                    <div class="board-col-label">Move-In</div>
                                 </div>
-                                <div class="plat-task-row">
-                                    <span class="plat-task-name">Paint Touch-Up</span>
-                                    <span class="plat-badge badge-inprogress">In Progress</span>
+                                <div class="board-row">
+                                    <div class="board-unit-label">TG-1</div>
+                                    <div class="board-cell cell-completed">Done</div>
+                                    <div class="board-cell cell-inprogress">Apr 6</div>
+                                    <div class="board-cell cell-scheduled">Apr 8</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">May 1</div>
                                 </div>
-                                <div class="plat-task-row">
-                                    <span class="plat-task-name">Appliance Check</span>
-                                    <span class="plat-badge badge-scheduled">Scheduled</span>
+                                <div class="board-row">
+                                    <div class="board-unit-label">SH-01</div>
+                                    <div class="board-cell cell-inprogress">Apr 5</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">May 13</div>
                                 </div>
-                                <div class="plat-task-row">
-                                    <span class="plat-task-name">Carpet</span>
-                                    <span class="plat-badge badge-scheduled">Scheduled</span>
+                                <div class="board-row">
+                                    <div class="board-unit-label">Unit 100</div>
+                                    <div class="board-cell cell-completed">Done</div>
+                                    <div class="board-cell cell-rejected">Rejected</div>
+                                    <div class="board-cell cell-rejected">Rejected</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">Apr 10</div>
+                                </div>
+                                <div class="board-row">
+                                    <div class="board-unit-label">MG-01</div>
+                                    <div class="board-cell cell-scheduled">Apr 7</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">Apr 9</div>
+                                </div>
+                                <div class="board-row">
+                                    <div class="board-unit-label">3000</div>
+                                    <div class="board-cell cell-completed">Done</div>
+                                    <div class="board-cell cell-inprogress">Apr 6</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-unscheduled">—</div>
+                                    <div class="board-cell cell-scheduled">Apr 16</div>
                                 </div>
                             </div>
                         </div>
@@ -775,95 +773,150 @@
             </div>
         </section>
 
-        <!-- 4b. Vendor Email Dispatch ────────────────────────── -->
-        <section class="operational-feature-section operational-feature-alt" id="vendor-dispatch">
-            <div class="operational-feature-container">
-                <div class="operational-feature-content operational-feature-right">
-                    <div class="operational-feature-image">
-                        <div class="plat-email-card">
-                            <div class="plat-email-topbar">
-                                <div class="plat-email-topbar-dot"></div>
-                                New Job Assignment · TURN
-                            </div>
-                            <div class="plat-email-body">
-                                <div class="plat-email-subject">Job Assignment: Unit 402 — Cleaning</div>
-                                <div class="plat-email-detail">
-                                    <span class="plat-email-detail-label">Property</span>
-                                    <span>Magnolia Gardens</span>
-                                </div>
-                                <div class="plat-email-detail">
-                                    <span class="plat-email-detail-label">Date</span>
-                                    <span>Tuesday, Apr 8</span>
-                                </div>
-                                <div class="plat-email-detail">
-                                    <span class="plat-email-detail-label">Time</span>
-                                    <span>9:00am</span>
-                                </div>
-                                <div class="plat-email-detail">
-                                    <span class="plat-email-detail-label">Job</span>
-                                    <span>Full unit cleaning, move-out condition</span>
-                                </div>
-                                <div class="plat-email-divider"></div>
-                                <div class="plat-email-btns">
-                                    <span class="plat-email-btn plat-email-btn-primary">Accept Job</span>
-                                    <span class="plat-email-btn plat-email-btn-secondary">Mark Complete</span>
-                                </div>
-                            </div>
+        <!-- 2. How TURN Works -->
+        <section class="p-flow-section">
+            <div class="p-container">
+                <p class="p-section-label">How It Works</p>
+                <h2 class="p-section-title">From Move-Out To Move-In Ready.</h2>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="flow-icon">🏠</div>
+                        <div>
+                            <div class="flow-step-num">01</div>
+                            <div class="flow-step-title">Move-Out Set</div>
+                            <div class="flow-step-desc">A resident gives notice. A TURN is created.</div>
                         </div>
                     </div>
-                    <div class="operational-feature-text plat-feature-text">
-                        <p class="section-eyebrow">Vendor-First Design</p>
-                        <h2 class="operational-section-heading">Vendors actually use it.</h2>
-                        <p class="operational-section-subheading">Built from the vendor's side of the process — not as an afterthought.</p>
-                        <p class="operational-feature-description">Most property software is built for the person at a desk. TURN is designed around the vendor showing up to do the work. They receive a clean job summary by email, confirm timing directly, and mark completion when done — creating a clear record for both sides without adding friction to either.</p>
+                    <div class="flow-step">
+                        <div class="flow-icon">📋</div>
+                        <div>
+                            <div class="flow-step-num">02</div>
+                            <div class="flow-step-title">Schedule Set</div>
+                            <div class="flow-step-desc">Property manager builds the make-ready checklist for the unit.</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">📤</div>
+                        <div>
+                            <div class="flow-step-num">03</div>
+                            <div class="flow-step-title">Vendors Assigned</div>
+                            <div class="flow-step-desc">Each job is dispatched to the right vendor. They get notified instantly.</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">✅</div>
+                        <div>
+                            <div class="flow-step-num">04</div>
+                            <div class="flow-step-title">Vendors Confirm & Execute</div>
+                            <div class="flow-step-desc">Vendors accept the job and mark it complete from their phone.</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔍</div>
+                        <div>
+                            <div class="flow-step-num">05</div>
+                            <div class="flow-step-title">Completion Verified</div>
+                            <div class="flow-step-desc">TURN confirms completion and updates the board automatically.</div>
+                        </div>
+                    </div>
+                    <div class="flow-step">
+                        <div class="flow-icon">🔑</div>
+                        <div>
+                            <div class="flow-step-num">06</div>
+                            <div class="flow-step-title">Move-In Ready</div>
+                            <div class="flow-step-desc">Property manager sees the unit is inspection ready and set for move-in day.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flow-callout">
+                    "Every step is visible to the right person at the right time, without anyone chasing an update."
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Three Roles -->
+        <section class="p-roles-section">
+            <div class="p-container">
+                <p class="p-section-label">Who It's Built For</p>
+                <h2 class="p-section-title" style="margin-bottom: 2.5rem;">Three Roles. One Platform.</h2>
+                <div class="p-roles-grid">
+                    <div class="p-role-card">
+                        <div class="p-role-icon">📋</div>
+                        <h3 class="p-role-title">Property Managers</h3>
+                        <p class="p-role-body">Schedule every vendor step, confirm completions, and run the full make-ready from a single board.</p>
+                        <div class="p-role-tags">
+                            <span class="p-tag">Vendor Scheduling</span>
+                            <span class="p-tag">Completion Tracking</span>
+                            <span class="p-tag">Real-Time Alerts</span>
+                            <span class="p-tag">Vendor Insights</span>
+                        </div>
+                    </div>
+                    <div class="p-role-card">
+                        <div class="p-role-icon">📊</div>
+                        <h3 class="p-role-title">Regionals &amp; Ownership</h3>
+                        <p class="p-role-body">See turn times, vendor performance, and unit status across your entire portfolio in real time. The visibility that protects NOI.</p>
+                        <div class="p-role-tags">
+                            <span class="p-tag">Portfolio View</span>
+                            <span class="p-tag">Property Analytics</span>
+                            <span class="p-tag">Vendor Data at Scale</span>
+                        </div>
+                    </div>
+                    <div class="p-role-card">
+                        <div class="p-role-icon">📱</div>
+                        <h3 class="p-role-title">Vendors</h3>
+                        <p class="p-role-body">Get your jobs, confirm dates, verify completion, and see an accurate schedule right on your phone, without needing to check in.</p>
+                        <div class="p-role-tags">
+                            <span class="p-tag">Automated Scheduling</span>
+                            <span class="p-tag">Job Confirmation</span>
+                            <span class="p-tag">Completion Verification</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4c. Real-Time Alerts ─────────────────────────────── -->
-        <section class="operational-feature-section" id="real-time-alerts">
-            <div class="operational-feature-container">
-                <div class="operational-feature-content operational-feature-left">
-                    <div class="operational-feature-text plat-feature-text">
-                        <p class="section-eyebrow">Real-Time Alerts</p>
-                        <h2 class="operational-section-heading">Know the moment something goes off track.</h2>
-                        <p class="operational-section-subheading">No more end-of-day surprises.</p>
-                        <p class="operational-feature-description">TURN confirms every job with your vendor before the scheduled date. If a vendor is late, unresponsive, or declines, you're alerted immediately — with options to reassign or follow up. Problems surface in hours, not after a move-in date has already slipped.</p>
+        <!-- 4a. Operational Efficiency -->
+        <section class="p-feature-section" style="background: var(--p-surface);">
+            <div class="p-container">
+                <div class="p-feature-inner">
+                    <div>
+                        <p class="p-feature-label">Operational Efficiency</p>
+                        <h2 class="p-feature-heading">Your Entire Make-Ready. In One Place.</h2>
+                        <p class="p-feature-subheading">Say goodbye to the spreadsheets, sticky notes, white boards, and panic texts.</p>
+                        <p class="p-feature-body">Schedule every vendor step for a unit and watch your board update automatically as work gets done. Each unit shows its current status, what's pending, and who's responsible without you having to ask.</p>
                     </div>
-                    <div class="operational-feature-image">
-                        <div class="plat-mockup-card">
-                            <div class="plat-mockup-label">Live Alerts</div>
-                            <div class="plat-alert-list">
-                                <div class="plat-alert-row plat-alert-success">
-                                    <span class="plat-alert-icon">✅</span>
-                                    <div class="plat-alert-text">
-                                        <span class="plat-alert-unit">Unit 204 · Cleaning Confirmed</span>
-                                        <span class="plat-alert-sub">Vendor confirmed · Apr 6, 8:00am</span>
+                    <div>
+                        <div class="p-mockup-card">
+                            <div class="p-mockup-title">Make-Ready Board</div>
+                            <div class="kanban-cols">
+                                <div>
+                                    <div class="kanban-col-header">Scheduled</div>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 204</div>
+                                        <span class="kanban-status ks-scheduled">Scheduled</span>
+                                    </div>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 519</div>
+                                        <span class="kanban-status ks-scheduled">Scheduled</span>
                                     </div>
                                 </div>
-                                <div class="plat-alert-row plat-alert-warning">
-                                    <span class="plat-alert-icon">⚠️</span>
-                                    <div class="plat-alert-text">
-                                        <span class="plat-alert-unit">Unit 311 · Vendor Unresponsive</span>
-                                        <span class="plat-alert-sub">No reply after 24 hours</span>
+                                <div>
+                                    <div class="kanban-col-header">In Progress</div>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 311</div>
+                                        <span class="kanban-status ks-inprogress">In Progress</span>
                                     </div>
-                                    <span class="plat-alert-action">Reassign</span>
-                                </div>
-                                <div class="plat-alert-row plat-alert-neutral">
-                                    <span class="plat-alert-icon">🕐</span>
-                                    <div class="plat-alert-text">
-                                        <span class="plat-alert-unit">Unit 519 · Awaiting Confirmation</span>
-                                        <span class="plat-alert-sub">Painting scheduled Apr 8</span>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 402</div>
+                                        <span class="kanban-status ks-inprogress">In Progress</span>
                                     </div>
                                 </div>
-                                <div class="plat-alert-row plat-alert-danger">
-                                    <span class="plat-alert-icon">✕</span>
-                                    <div class="plat-alert-text">
-                                        <span class="plat-alert-unit">Unit 402 · Job Declined</span>
-                                        <span class="plat-alert-sub">Vendor unavailable Apr 7</span>
+                                <div>
+                                    <div class="kanban-col-header">Completed</div>
+                                    <div class="kanban-card">
+                                        <div class="kanban-unit">Unit 108</div>
+                                        <span class="kanban-status ks-completed">Completed</span>
                                     </div>
-                                    <span class="plat-alert-action">Reassign</span>
                                 </div>
                             </div>
                         </div>
@@ -872,53 +925,126 @@
             </div>
         </section>
 
-        <!-- 4d. Analytics ───────────────────────────────────── -->
-        <section class="operational-feature-section operational-feature-alt" id="community-vendor-analytics">
-            <div class="operational-feature-container">
-                <div class="operational-feature-content operational-feature-right">
-                    <div class="operational-feature-image">
-                        <div class="plat-mockup-card">
-                            <div class="plat-mockup-label">Portfolio Analytics</div>
-                            <div class="plat-analytics-bars">
-                                <div class="plat-analytics-bar" style="height: 45%;"></div>
-                                <div class="plat-analytics-bar" style="height: 62%;"></div>
-                                <div class="plat-analytics-bar" style="height: 55%;"></div>
-                                <div class="plat-analytics-bar" style="height: 80%;"></div>
-                                <div class="plat-analytics-bar" style="height: 70%;"></div>
-                                <div class="plat-analytics-bar" style="height: 90%;"></div>
-                                <div class="plat-analytics-bar" style="height: 75%;"></div>
-                            </div>
-                            <div class="plat-analytics-stats">
-                                <div class="plat-analytics-stat">
-                                    <span class="plat-analytics-val">6.2d</span>
-                                    <span class="plat-analytics-lbl">Avg Turn Time</span>
-                                </div>
-                                <div class="plat-analytics-stat">
-                                    <span class="plat-analytics-val">87%</span>
-                                    <span class="plat-analytics-lbl">On-Time Rate</span>
-                                </div>
-                                <div class="plat-analytics-stat">
-                                    <span class="plat-analytics-val">94%</span>
-                                    <span class="plat-analytics-lbl">Acceptance Rate</span>
-                                </div>
+        <!-- 4b. Vendor Dispatch -->
+        <section class="p-feature-section" style="background: var(--p-bg);">
+            <div class="p-container">
+                <div class="p-feature-inner reverse">
+                    <div>
+                        <p class="p-feature-label">Vendor-First Design</p>
+                        <h2 class="p-feature-heading">Vendors Actually Use It.</h2>
+                        <p class="p-feature-subheading">Because it was built from their side of the process.</p>
+                        <p class="p-feature-body">Most property software is built for the person at a desk. TURN is built for the vendor showing up to do the work. They receive a clean job summary, confirm via a simple link, and mark completion with proof.</p>
+                    </div>
+                    <div>
+                        <div class="mobile-frame">
+                            <div class="mobile-screen">
+                                <span class="mobile-job-badge">Job Assignment</span>
+                                <div class="mobile-job-title">Unit 402 · Cleaning</div>
+                                <div class="mobile-job-detail">📅 Tuesday, Apr 8</div>
+                                <div class="mobile-job-detail">🕘 9:00am</div>
+                                <div class="mobile-job-detail">📍 Magnolia Gardens</div>
+                                <div class="mobile-job-divider"></div>
+                                <div class="mobile-btn mobile-btn-primary">Accept Job</div>
+                                <div class="mobile-btn mobile-btn-secondary">Mark Complete</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="operational-feature-text plat-feature-text">
-                        <p class="section-eyebrow">Analytics</p>
-                        <h2 class="operational-section-heading">Data that didn't exist before.</h2>
-                        <p class="operational-section-subheading">Not dashboards for their own sake — insight that protects NOI.</p>
-                        <p class="operational-feature-description">Average turn times by property. Vendor on-time rates. Job acceptance rates. Days vacant waiting for work. Regionals and ownership get the portfolio-wide visibility they need — automatically captured as a byproduct of the work being done, not an extra step anyone has to remember.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. Bottom CTA ────────────────────────────────────── -->
-        <section class="plat-cta-section">
-            <h2 class="plat-cta-title">Ready to see it in action?</h2>
-            <p class="plat-cta-sub">Book a 20-minute walkthrough. No slides. Just the product.</p>
-            <a href="#" class="btn btn-primary" style="font-size: 1rem; padding: 0.875rem 2.5rem;" data-get-demo>Schedule a Demo</a>
+        <!-- 4c. Real-Time Alerts -->
+        <section class="p-feature-section" style="background: var(--p-surface);">
+            <div class="p-container">
+                <div class="p-feature-inner">
+                    <div>
+                        <p class="p-feature-label">Real-Time Alerts</p>
+                        <h2 class="p-feature-heading">Know The Moment Something Goes Off Track.</h2>
+                        <p class="p-feature-subheading">No more end-of-day surprises.</p>
+                        <p class="p-feature-body">TURN confirms every job with your vendor before the scheduled date. If a vendor is late, declines, or goes silent, you're alerted immediately with options to reassign or follow up. You find out about problems before they become delays.</p>
+                    </div>
+                    <div>
+                        <div class="p-mockup-card">
+                            <div class="p-mockup-title">Live Alerts</div>
+                            <div class="alert-list">
+                                <div class="alert-item alert-success">
+                                    <span class="alert-icon">✅</span>
+                                    <div class="alert-text">
+                                        <span class="alert-unit">Unit 204 · Cleaning Completed</span>
+                                        <span class="alert-desc">Just now</span>
+                                    </div>
+                                </div>
+                                <div class="alert-item alert-warning">
+                                    <span class="alert-icon">⚠️</span>
+                                    <div class="alert-text">
+                                        <span class="alert-unit">Unit 311 · Vendor Unresponsive</span>
+                                        <span class="alert-desc">No confirmation after 24h</span>
+                                    </div>
+                                    <span class="alert-action-btn">Reassign</span>
+                                </div>
+                                <div class="alert-item alert-info">
+                                    <span class="alert-icon">🕐</span>
+                                    <div class="alert-text">
+                                        <span class="alert-unit">Unit 519 · Scheduled Tomorrow</span>
+                                        <span class="alert-desc">Painting · 8:00am</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4d. Analytics -->
+        <section class="p-feature-section" style="background: var(--p-bg);">
+            <div class="p-container">
+                <div class="p-feature-inner reverse">
+                    <div>
+                        <p class="p-feature-label">Analytics</p>
+                        <h2 class="p-feature-heading">Data That Didn't Exist Before.</h2>
+                        <p class="p-feature-subheading">Insights that protect NOI.</p>
+                        <p class="p-feature-body">See average turn times by property, vendor on-time rates, job acceptance rates, and how long units sit vacant waiting for work. Regionals and ownership get the visibility they need across the whole portfolio, automatically, as a byproduct of the work being done.</p>
+                    </div>
+                    <div>
+                        <div class="p-mockup-card">
+                            <div class="p-mockup-title">Portfolio Analytics</div>
+                            <div class="analytics-bars">
+                                <div class="analytics-bar" style="height: 45%;"></div>
+                                <div class="analytics-bar" style="height: 62%;"></div>
+                                <div class="analytics-bar" style="height: 55%;"></div>
+                                <div class="analytics-bar" style="height: 80%;"></div>
+                                <div class="analytics-bar" style="height: 70%;"></div>
+                                <div class="analytics-bar" style="height: 90%;"></div>
+                                <div class="analytics-bar" style="height: 75%;"></div>
+                            </div>
+                            <div class="analytics-stats">
+                                <div class="analytics-stat">
+                                    <span class="analytics-stat-val">6.2d</span>
+                                    <span class="analytics-stat-label">Avg Turn Time</span>
+                                </div>
+                                <div class="analytics-stat">
+                                    <span class="analytics-stat-val">87%</span>
+                                    <span class="analytics-stat-label">On-Time Rate</span>
+                                </div>
+                                <div class="analytics-stat">
+                                    <span class="analytics-stat-val">94%</span>
+                                    <span class="analytics-stat-label">Acceptance</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. Bottom CTA -->
+        <section class="p-cta-section">
+            <div class="p-container">
+                <h2 class="p-cta-title">Ready to see it in action?</h2>
+                <p class="p-cta-sub">Book a 20-minute walkthrough.</p>
+                <a href="#" class="btn btn-primary" style="font-size: 1rem; padding: 0.875rem 2.5rem;" data-get-demo>Schedule a Demo</a>
+            </div>
         </section>
 
     </main>
