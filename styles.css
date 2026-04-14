@@ -22,6 +22,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
 }
 
 /* ── Section eyebrow label — used site-wide ── */
@@ -361,7 +362,7 @@ p {
 .hero {
     width: min(1200px, 100%);
     margin: 0 auto;
-    padding: 3rem 3rem 2.5rem;
+    padding: 5rem 3rem 2.5rem;
     text-align: center;
     display: flex;
     flex-direction: column;

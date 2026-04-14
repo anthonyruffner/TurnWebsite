@@ -3,7 +3,21 @@
     "allow": [
       "Bash(git init:*)",
       "Bash(git remote:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git config:*)",
+      "Bash(git push:*)",
+      "Bash(gh auth:*)",
+      "Bash(brew install:*)",
+      "Bash(ssh-keygen -t ed25519 -C \"anthony@turnapts.com\" -f ~/.ssh/id_ed25519 -N \"\")",
+      "mcp__Claude_Preview__preview_start",
+      "Read(//usr/local/bin/**)",
+      "Read(//opt/homebrew/bin/**)",
+      "Read(//usr/local/**)",
+      "Read(//opt/**)",
+      "Bash(/opt/homebrew/bin/npm install:*)",
+      "Bash(export PATH=\"/opt/homebrew/bin:$PATH\")",
+      "Bash(npm install:*)"
     ]
   }
 }
