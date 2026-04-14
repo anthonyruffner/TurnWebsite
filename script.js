@@ -33,12 +33,13 @@ async function submitForm(data) {
 // Mobile Hamburger Menu
 // ===================================
 
-(function initHamburger() {
+function initHamburger() {
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
     if (!hamburger || !navLinks) return;
 
-    hamburger.addEventListener('click', function () {
+    hamburger.addEventListener('click', function (e) {
+        e.stopPropagation();
         hamburger.classList.toggle('active');
         navLinks.classList.toggle('open');
         document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
@@ -52,7 +53,24 @@ async function submitForm(data) {
             document.body.style.overflow = '';
         });
     });
-})();
+
+    // Close menu when clicking outside of it
+    document.addEventListener('click', function (e) {
+        if (navLinks.classList.contains('open') &&
+            !navLinks.contains(e.target) &&
+            !hamburger.contains(e.target)) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHamburger);
+} else {
+    initHamburger();
+}
 
 // Prevent browser scroll restoration
 if ('scrollRestoration' in history) {
@@ -967,31 +985,55 @@ if (header) {
     
     // Note: Phone number input restriction moved to Get Demo form handler
     
-    // Handle form submission
+    // Handle form submission — wired to Web3Forms
     if (scheduleCallForm) {
-        scheduleCallForm.addEventListener('submit', (e) => {
+        scheduleCallForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
-            // Get form data
+
             const formData = new FormData(scheduleCallForm);
             const data = Object.fromEntries(formData.entries());
-            
-            // For now, just log and show success (implement actual submission later)
-            console.log('Join waitlist form submitted:', data);
-            
-            // Show success feedback
             const submitBtn = scheduleCallForm.querySelector('.schedule-call-submit');
             const originalText = submitBtn.textContent;
-            submitBtn.textContent = 'Joined!';
-            submitBtn.style.background = '#2d8a4e';
-            
-            // Reset form after delay
-            setTimeout(() => {
-                scheduleCallForm.reset();
-                submitBtn.textContent = originalText;
-                submitBtn.style.background = '';
-                closeScheduleCallPage();
-            }, 2000);
+
+            function showSuccess() {
+                submitBtn.textContent = 'Sent!';
+                submitBtn.style.background = '#2d8a4e';
+                setTimeout(() => {
+                    scheduleCallForm.reset();
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                    closeScheduleCallPage();
+                }, 2000);
+            }
+
+            function showError(msg) {
+                submitBtn.textContent = msg || 'Try again';
+                submitBtn.style.background = '#b91c1c';
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                }, 3000);
+            }
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending…';
+            try {
+                await submitForm({
+                    form: 'demo_request',
+                    full_name: data.fullName || data.full_name || '',
+                    email: data.emailAddress || data.email || '',
+                    phone: data.phoneNumber || data.phone || '',
+                    company: data.company || '',
+                    message: data.message || '',
+                    submitted_at: new Date().toISOString()
+                });
+                showSuccess();
+            } catch (err) {
+                console.error('Demo request submit error:', err);
+                showError('Something went wrong');
+            } finally {
+                submitBtn.disabled = false;
+            }
         });
     }
 })();

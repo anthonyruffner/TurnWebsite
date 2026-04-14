@@ -638,6 +638,21 @@
             font-family: var(--p-display);
         }
 
+        /* ── Shared image style ── */
+        .feature-img {
+            width: 100%;
+            display: block;
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+        }
+
+        .feature-img-wrap {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
         /* ── Responsive ── */
         @media (max-width: 1024px) {
             .flow-steps { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
@@ -646,9 +661,14 @@
         }
 
         @media (max-width: 768px) {
+            /* Stack all grids to single column */
             .p-hero-inner,
-            .p-feature-inner { grid-template-columns: 1fr; direction: ltr; }
-            .p-feature-inner.reverse { direction: ltr; }
+            .p-feature-inner { grid-template-columns: 1fr !important; direction: ltr !important; gap: 2.5rem !important; }
+            /* Reset rtl direction so DOM order (text first, image second) is respected */
+            .p-feature-inner.reverse { direction: ltr !important; }
+            .p-feature-inner.reverse > * { direction: ltr !important; }
+            /* Images always render below their text — no order overrides needed;
+               DOM order is: text div first, image div second in all sections */
             .p-roles-grid { grid-template-columns: 1fr; }
             .flow-steps { grid-template-columns: 1fr; gap: 1.75rem; }
             .flow-step { align-items: flex-start; text-align: left; flex-direction: row; gap: 1rem; }
@@ -664,11 +684,18 @@
             .board-row { grid-template-columns: 1fr repeat(3, 1fr); }
             .board-col-label:nth-child(n+5),
             .board-cell:nth-child(n+5) { display: none; }
+            /* Images: full width, centered, no overflow or scale */
+            .feature-img-wrap { width: 100%; transform: none !important; }
+            .feature-img-wrap img,
+            .feature-img { width: 100% !important; transform: none !important; }
+            /* Hero board-mockup: remove scale */
+            .p-hero-inner > div[style*="scale"] { transform: none !important; width: 100%; }
         }
 
         @media (max-width: 480px) {
             .p-container { padding: 0 1.25rem; }
             .analytics-stats { grid-template-columns: 1fr; }
+            .feature-img-wrap { border-radius: 8px; }
         }
     </style>
 </head>
@@ -709,10 +736,8 @@
                         <p class="p-hero-sub">One system for property managers, regionals, and vendors — built around the unit turn.</p>
                         <a href="#" class="btn btn-primary" data-get-demo>Schedule a Demo</a>
                     </div>
-                    <div style="transform: scale(1.18); transform-origin: center center;">
-                        <div class="board-mockup">
-                            <img src="assets/dashboard-board.png" alt="TURN Make-Ready Board" style="width:100%;display:block;border-radius:12px;">
-                        </div>
+                    <div style="transform: scale(1.18); transform-origin: center center; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.09);">
+                        <img src="assets/dashboard-board.png" alt="TURN Make-Ready Board" style="width:100%;display:block;">
                     </div>
                 </div>
             </div>
@@ -830,41 +855,8 @@
                         <p class="p-feature-subheading">Say goodbye to the spreadsheets, sticky notes, white boards, and panic texts.</p>
                         <p class="p-feature-body">Schedule every vendor step for a unit and watch your board update automatically as work gets done. Each unit shows its current status, what's pending, and who's responsible without you having to ask.</p>
                     </div>
-                    <div>
-                        <div class="p-mockup-card">
-                            <div class="p-mockup-title">Make-Ready Board</div>
-                            <div class="kanban-cols">
-                                <div>
-                                    <div class="kanban-col-header">Scheduled</div>
-                                    <div class="kanban-card">
-                                        <div class="kanban-unit">Unit 204</div>
-                                        <span class="kanban-status ks-scheduled">Scheduled</span>
-                                    </div>
-                                    <div class="kanban-card">
-                                        <div class="kanban-unit">Unit 519</div>
-                                        <span class="kanban-status ks-scheduled">Scheduled</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="kanban-col-header">In Progress</div>
-                                    <div class="kanban-card">
-                                        <div class="kanban-unit">Unit 311</div>
-                                        <span class="kanban-status ks-inprogress">In Progress</span>
-                                    </div>
-                                    <div class="kanban-card">
-                                        <div class="kanban-unit">Unit 402</div>
-                                        <span class="kanban-status ks-inprogress">In Progress</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div class="kanban-col-header">Completed</div>
-                                    <div class="kanban-card">
-                                        <div class="kanban-unit">Unit 108</div>
-                                        <span class="kanban-status ks-completed">Completed</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="feature-img-wrap">
+                        <img src="assets/Schedule Jobs.png" alt="Schedule Jobs" class="feature-img" style="width:85%;">
                     </div>
                 </div>
             </div>
@@ -908,34 +900,8 @@
                         <p class="p-feature-subheading">No more end-of-day surprises.</p>
                         <p class="p-feature-body">TURN confirms every job with your vendor before the scheduled date. If a vendor is late, declines, or goes silent, you're alerted immediately with options to reassign or follow up. You find out about problems before they become delays.</p>
                     </div>
-                    <div>
-                        <div class="p-mockup-card">
-                            <div class="p-mockup-title">Live Alerts</div>
-                            <div class="alert-list">
-                                <div class="alert-item alert-success">
-                                    <span class="alert-icon">✅</span>
-                                    <div class="alert-text">
-                                        <span class="alert-unit">Unit 204 · Cleaning Completed</span>
-                                        <span class="alert-desc">Just now</span>
-                                    </div>
-                                </div>
-                                <div class="alert-item alert-warning">
-                                    <span class="alert-icon">⚠️</span>
-                                    <div class="alert-text">
-                                        <span class="alert-unit">Unit 311 · Vendor Unresponsive</span>
-                                        <span class="alert-desc">No confirmation after 24h</span>
-                                    </div>
-                                    <span class="alert-action-btn">Reassign</span>
-                                </div>
-                                <div class="alert-item alert-info">
-                                    <span class="alert-icon">🕐</span>
-                                    <div class="alert-text">
-                                        <span class="alert-unit">Unit 519 · Scheduled Tomorrow</span>
-                                        <span class="alert-desc">Painting · 8:00am</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="feature-img-wrap">
+                        <img src="assets/Alerts.png" alt="Real-Time Alerts" class="feature-img">
                     </div>
                 </div>
             </div>
@@ -951,8 +917,8 @@
                         <p class="p-feature-subheading">Insights that protect NOI.</p>
                         <p class="p-feature-body">See average turn times by property, vendor on-time rates, job acceptance rates, and how long units sit vacant waiting for work. Regionals and ownership get the visibility they need across the whole portfolio, automatically, as a byproduct of the work being done.</p>
                     </div>
-                    <div>
-                        <img src="assets/Vendor Data.png" alt="Vendor Analytics Dashboard" style="width:100%;display:block;border-radius:12px;border:1px solid rgba(0,0,0,0.08);box-shadow:0 8px 40px rgba(0,0,0,0.09);">
+                    <div class="feature-img-wrap">
+                        <img src="assets/Vendor Data.png" alt="Vendor Analytics Dashboard" class="feature-img">
                     </div>
                 </div>
             </div>
