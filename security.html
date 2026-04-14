@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Security — TURN by SaddleUp Inc.">
+    <title>Security — Turn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=1738275600">
+    <style>
+        .legal-page { background: #FAF9F7; min-height: 100vh; }
+        .legal-hero {
+            background: #ffffff;
+            border-bottom: 1px solid rgba(0,0,0,0.07);
+            padding: 5rem 0 3.5rem;
+        }
+        .legal-container { max-width: 780px; margin: 0 auto; padding: 0 2rem; }
+        .legal-eyebrow {
+            font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+            text-transform: uppercase; color: #CD6633; margin-bottom: 1rem;
+            font-family: 'Inter', system-ui, sans-serif;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .legal-eyebrow::before { content: ''; display: block; width: 18px; height: 1.5px; background: #CD6633; }
+        .legal-title {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 400;
+            color: #1a1a1a; line-height: 1.2; margin-bottom: 1rem;
+        }
+        .legal-meta { font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem; color: #888; margin-top: 0.5rem; }
+        .legal-body { padding: 4rem 0 6rem; }
+        .legal-body h2 {
+            font-family: Georgia, 'Times New Roman', serif; font-size: 1.35rem;
+            font-weight: 400; color: #1a1a1a; margin: 3rem 0 0.85rem;
+            padding-top: 0.5rem; border-top: 1px solid rgba(0,0,0,0.07);
+        }
+        .legal-body h2:first-of-type { margin-top: 0; border-top: none; }
+        .legal-body p {
+            font-family: 'Inter', system-ui, sans-serif; font-size: 0.95rem;
+            color: #444; line-height: 1.85; margin-bottom: 1.1rem;
+        }
+        .legal-body ul {
+            font-family: 'Inter', system-ui, sans-serif; font-size: 0.95rem;
+            color: #444; line-height: 1.85; margin: 0.5rem 0 1.25rem 1.5rem;
+        }
+        .legal-body ul li { margin-bottom: 0.4rem; }
+        .legal-body a { color: #CD6633; text-decoration: none; border-bottom: 1px solid rgba(205,102,51,0.3); transition: border-color 0.2s; }
+        .legal-body a:hover { border-color: #CD6633; }
+        .legal-callout {
+            background: rgba(205,102,51,0.06); border-left: 3px solid #CD6633;
+            border-radius: 0 8px 8px 0; padding: 1.1rem 1.5rem; margin: 2rem 0;
+            font-family: 'Inter', system-ui, sans-serif; font-size: 0.9rem; color: #555; line-height: 1.7;
+        }
+        .security-pillars {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin: 2rem 0;
+        }
+        .security-pillar {
+            background: #ffffff; border: 1px solid rgba(0,0,0,0.07); border-radius: 10px;
+            padding: 1.5rem;
+        }
+        .security-pillar-icon { font-size: 1.25rem; margin-bottom: 0.6rem; }
+        .security-pillar-title {
+            font-family: 'Inter', system-ui, sans-serif; font-size: 0.875rem;
+            font-weight: 600; color: #1a1a1a; margin-bottom: 0.4rem;
+        }
+        .security-pillar-desc {
+            font-family: 'Inter', system-ui, sans-serif; font-size: 0.825rem;
+            color: #666; line-height: 1.65; margin: 0;
+        }
+        @media (max-width: 600px) {
+            .security-pillars { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo"><a href="index.html">turn</a></div>
+                <nav class="nav-links" aria-label="Site">
+                    <a class="nav-link" href="index.html#home">Home</a>
+                    <a class="nav-link" href="features.html">Platform</a>
+                    <a class="nav-link" href="about.html">About</a>
+                    <a class="nav-link" href="contact.html">Contact</a>
+                    <a class="mobile-demo-link" href="#" data-get-demo>Get Demo</a>
+                </nav>
+                <div class="nav-actions">
+                    <a href="#" class="btn btn-primary nav-cta" data-get-demo>Get Demo</a>
+                </div>
+                <button class="hamburger" aria-label="Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="legal-page">
+
+        <section class="legal-hero">
+            <div class="legal-container">
+                <div class="legal-eyebrow">Trust &amp; Safety</div>
+                <h1 class="legal-title">Security</h1>
+                <p class="legal-meta">Last updated: April 14, 2026 &nbsp;·&nbsp; SaddleUp Inc. (TURN)</p>
+            </div>
+        </section>
+
+        <section class="legal-body">
+            <div class="legal-container">
+
+                <div class="legal-callout">
+                    TURN handles operational data for real properties and real vendors. We take that responsibility seriously and have designed our platform with security as a baseline requirement, not an afterthought.
+                </div>
+
+                <h2>Our Approach</h2>
+                <p>We are an early-stage company and we are direct about that. We are not claiming enterprise-grade certifications we don't have. What we are committed to is applying sound, industry-standard security practices appropriate for a B2B SaaS platform — and growing our security posture alongside our product.</p>
+
+                <div class="security-pillars">
+                    <div class="security-pillar">
+                        <div class="security-pillar-icon">🔐</div>
+                        <div class="security-pillar-title">Encryption in Transit</div>
+                        <p class="security-pillar-desc">All data transmitted between your browser and our servers is encrypted using TLS (HTTPS). We do not accept unencrypted connections.</p>
+                    </div>
+                    <div class="security-pillar">
+                        <div class="security-pillar-icon">🗄️</div>
+                        <div class="security-pillar-title">Encryption at Rest</div>
+                        <p class="security-pillar-desc">Stored data — including user records, property data, and operational logs — is encrypted at rest using standard database encryption.</p>
+                    </div>
+                    <div class="security-pillar">
+                        <div class="security-pillar-icon">🧑‍💻</div>
+                        <div class="security-pillar-title">Access Controls</div>
+                        <p class="security-pillar-desc">Internal access to production systems and user data is restricted to authorized personnel only, with role-based controls and audit logging.</p>
+                    </div>
+                    <div class="security-pillar">
+                        <div class="security-pillar-icon">☁️</div>
+                        <div class="security-pillar-title">Secure Infrastructure</div>
+                        <p class="security-pillar-desc">TURN is hosted on Vercel and uses infrastructure built on reputable cloud providers with SOC 2-compliant data centers.</p>
+                    </div>
+                    <div class="security-pillar">
+                        <div class="security-pillar-icon">🔑</div>
+                        <div class="security-pillar-title">Credential Safety</div>
+                        <p class="security-pillar-desc">User passwords are hashed using a modern algorithm (bcrypt or equivalent) and never stored in plain text. We do not have access to your password.</p>
+                    </div>
+                    <div class="security-pillar">
+                        <div class="security-pillar-icon">🚨</div>
+                        <div class="security-pillar-title">Incident Response</div>
+                        <p class="security-pillar-desc">In the event of a security incident, we will notify affected users promptly and take immediate steps to contain and investigate the issue.</p>
+                    </div>
+                </div>
+
+                <h2>What We Don't Do</h2>
+                <ul>
+                    <li>We do not sell your data or share it with advertisers</li>
+                    <li>We do not store payment card information (payment processing, if applicable, is handled by a PCI-compliant third-party processor)</li>
+                    <li>We do not log sensitive form inputs beyond what is needed to operate the platform</li>
+                    <li>We do not allow unauthorized third-party access to your operational data</li>
+                </ul>
+
+                <h2>Third-Party Vendors</h2>
+                <p>We work with a limited set of third-party service providers to operate TURN (hosting, email delivery, analytics). We evaluate each for reasonable security practices and data handling standards. We do not grant third parties access to your data beyond what is necessary to deliver the service.</p>
+
+                <h2>Reporting a Security Issue</h2>
+                <p>If you discover a security vulnerability in TURN, please report it responsibly by emailing us at <a href="mailto:notifications@turnapts.com">notifications@turnapts.com</a> with "Security" in the subject line. We take all reports seriously and will respond within 48 hours. We ask that you give us reasonable time to investigate before public disclosure.</p>
+
+                <h2>Roadmap</h2>
+                <p>As TURN grows, we are committed to expanding our security posture. Items on our roadmap include multi-factor authentication (MFA), SSO support for enterprise customers, formal penetration testing, and SOC 2 Type II compliance as the platform matures.</p>
+
+                <h2>Questions</h2>
+                <p>For security questions or concerns, reach out at <a href="mailto:notifications@turnapts.com">notifications@turnapts.com</a>.</p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-logo"><a href="index.html">turn</a></div>
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html#home" class="footer-link">Home</a>
+                <a href="features.html" class="footer-link">Platform</a>
+                <a href="about.html" class="footer-link">About</a>
+                <a href="contact.html" class="footer-link">Contact</a>
+                <a href="privacy.html" class="footer-link">Privacy</a>
+                <a href="terms.html" class="footer-link">Terms</a>
+                <a href="cookies.html" class="footer-link">Cookies</a>
+                <a href="security.html" class="footer-link">Security</a>
+            </nav>
+            <div class="footer-copyright">
+                <p>&copy; 2026 SaddleUp Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="join-waitlist-page" id="joinWaitlistPage" aria-hidden="true">
+        <div class="join-waitlist-content">
+            <h1 class="join-waitlist-title">Get Demo</h1>
+            <p class="join-waitlist-subtitle">Fill out the form below to request a demo, and we'll get back to you.</p>
+            <form class="join-waitlist-form" id="joinWaitlistForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Enter first &amp; last name" required class="join-waitlist-input">
+                </div>
+                <div class="form-group">
+                    <label for="emailAddress">Email Address</label>
+                    <input type="email" id="emailAddress" name="emailAddress" placeholder="Enter your work email" required class="join-waitlist-input">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" class="join-waitlist-input">
+                </div>
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" placeholder="Enter your company" class="join-waitlist-input">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Type your message..." rows="4" class="join-waitlist-textarea"></textarea>
+                </div>
+                <button type="submit" class="join-waitlist-submit">Request Demo</button>
+            </form>
+            <div class="join-waitlist-footer-line"></div>
+        </div>
+    </div>
+
+    <script src="/form-config.js"></script>
+    <script src="/script.js"></script>
+    <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
