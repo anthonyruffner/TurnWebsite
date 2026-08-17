@@ -1046,8 +1046,7 @@ if (header) {
 (function initJoinWaitlistPage() {
     const joinWaitlistPage = document.getElementById('joinWaitlistPage');
     const joinWaitlistTriggers = document.querySelectorAll('[data-get-demo]');
-    const joinWaitlistForm = document.getElementById('joinWaitlistForm');
-    
+
     if (!joinWaitlistPage || joinWaitlistTriggers.length === 0) return;
     
     let isOpen = false;
@@ -1111,7 +1110,7 @@ if (header) {
     function openJoinWaitlistPage() {
         if (isOpen) return;
         isOpen = true;
-        
+
         document.body.classList.add('join-waitlist-open');
         joinWaitlistPage.classList.add('is-active');
         joinWaitlistPage.setAttribute('aria-hidden', 'false');
@@ -1158,23 +1157,6 @@ if (header) {
         });
     });
     
-    // Restrict phone number input to numbers only (for Get Demo form)
-    const phoneInput = joinWaitlistPage.querySelector('#phoneNumber');
-    if (phoneInput) {
-        phoneInput.addEventListener('input', (e) => {
-            // Remove any non-numeric characters
-            e.target.value = e.target.value.replace(/\D/g, '');
-        });
-        
-        // Also prevent non-numeric characters on paste
-        phoneInput.addEventListener('paste', (e) => {
-            e.preventDefault();
-            const pastedText = (e.clipboardData || window.clipboardData).getData('text');
-            const numericOnly = pastedText.replace(/\D/g, '');
-            phoneInput.value = numericOnly;
-        });
-    }
-    
     // Close when clicking outside the card (on the background)
     joinWaitlistPage.addEventListener('click', (e) => {
         if (e.target === joinWaitlistPage) {
@@ -1189,58 +1171,6 @@ if (header) {
             closeJoinWaitlistPage();
         }
     });
-    
-    // Handle form submission
-    if (joinWaitlistForm) {
-        joinWaitlistForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            const formData = new FormData(joinWaitlistForm);
-            const data = Object.fromEntries(formData.entries());
-            const submitBtn = joinWaitlistForm.querySelector('.join-waitlist-submit');
-            const originalText = submitBtn.textContent;
-            
-            function showSuccess() {
-                submitBtn.textContent = 'Requested!';
-                submitBtn.style.background = '#2d8a4e';
-                setTimeout(() => {
-                    joinWaitlistForm.reset();
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.background = '';
-                    closeJoinWaitlistPage();
-                }, 2000);
-            }
-            
-            function showError(msg) {
-                submitBtn.textContent = msg || 'Try again';
-                submitBtn.style.background = '#b91c1c';
-                setTimeout(() => {
-                    submitBtn.textContent = originalText;
-                    submitBtn.style.background = '';
-                }, 3000);
-            }
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending…';
-            try {
-                await submitForm({
-                    form: 'demo_request',
-                    full_name: data.fullName || '',
-                    email: data.emailAddress || '',
-                    phone: data.phoneNumber || '',
-                    company: data.company || '',
-                    message: data.message || '',
-                    submitted_at: new Date().toISOString()
-                });
-                showSuccess();
-            } catch (err) {
-                console.error('Demo request submit error:', err);
-                showError('Something went wrong');
-            } finally {
-                submitBtn.disabled = false;
-            }
-        });
-    }
 })();
 
 // ===================================

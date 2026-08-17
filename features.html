@@ -954,35 +954,16 @@
     <div class="join-waitlist-page" id="joinWaitlistPage" aria-hidden="true">
         <div class="join-waitlist-content">
             <h1 class="join-waitlist-title">Get Demo</h1>
-            <p class="join-waitlist-subtitle">Fill out the form below to request a demo, and we'll get back to you.</p>
-            <form class="join-waitlist-form" id="joinWaitlistForm">
-                <div class="form-group">
-                    <label for="fullName">Full Name</label>
-                    <input type="text" id="fullName" name="fullName" placeholder="Enter first &amp; last name" required class="join-waitlist-input">
-                </div>
-                <div class="form-group">
-                    <label for="emailAddress">Email Address</label>
-                    <input type="email" id="emailAddress" name="emailAddress" placeholder="Enter your work email" required class="join-waitlist-input">
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Enter your phone number" class="join-waitlist-input">
-                </div>
-                <div class="form-group">
-                    <label for="company">Company</label>
-                    <input type="text" id="company" name="company" placeholder="Enter your company" class="join-waitlist-input">
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" placeholder="Type your message..." rows="4" class="join-waitlist-textarea"></textarea>
-                </div>
-                <button type="submit" class="join-waitlist-submit">Request Demo</button>
-            </form>
+            <p class="join-waitlist-subtitle">Pick a time that works for you and we'll walk you through it.</p>
+
+            <div class="join-waitlist-calendly calendly-inline-widget" data-url="https://calendly.com/anthony-turnapts/30min?hide_gdpr_banner=1"></div>
+
             <div class="join-waitlist-footer-line"></div>
         </div>
     </div>
 
     <script src="/form-config.js"></script>
+    <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
     <script src="/script.js"></script>
     <script defer src="/_vercel/insights/script.js"></script>
 </body>

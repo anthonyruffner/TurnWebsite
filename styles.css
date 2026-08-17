@@ -2725,82 +2725,11 @@ body.join-waitlist-open .btn-primary.nav-cta:hover {
     max-width: 100%;
 }
 
-.join-waitlist-form {
+.join-waitlist-calendly {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    min-width: 280px;
+    height: 650px;
     margin-bottom: 1rem;
-}
-
-.join-waitlist-form .form-group {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.375rem;
-    text-align: left;
-    width: 100%;
-}
-
-.join-waitlist-form label {
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: #2d2d2d;
-}
-
-.join-waitlist-input,
-.join-waitlist-textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    background: #ffffff;
-    border: 1px solid #e0e0e0;
-    border-radius: 999px;
-    font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    color: #2d2d2d;
-    transition: border-color 200ms ease, box-shadow 200ms ease;
-    outline: none;
-}
-
-.join-waitlist-textarea {
-    border-radius: 16px;
-    resize: vertical;
-    min-height: 100px;
-}
-
-.join-waitlist-input::placeholder,
-.join-waitlist-textarea::placeholder {
-    color: #9a9a9a;
-}
-
-.join-waitlist-input:focus,
-.join-waitlist-textarea:focus {
-    border-color: #CD6633;
-    box-shadow: 0 0 0 3px rgba(205, 102, 51, 0.1);
-}
-
-.join-waitlist-submit {
-    width: 100%;
-    padding: 0.75rem 1.5rem;
-    margin-top: 0.25rem;
-    background: #CD6633;
-    color: white;
-    border: none;
-    border-radius: 999px;
-    font-family: var(--font-sans);
-    font-size: 0.9375rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 200ms ease, transform 150ms ease;
-}
-
-.join-waitlist-submit:hover {
-    background: #B85A2A;
-}
-
-.join-waitlist-submit:active {
-    transform: scale(0.98);
 }
 
 .join-waitlist-footer-line {
@@ -2830,10 +2759,6 @@ body.join-waitlist-open .btn-primary.nav-cta:hover {
         margin-bottom: 1.25rem;
         font-size: 0.875rem;
     }
-    
-    .join-waitlist-form {
-        gap: 0.875rem;
-    }
 }
 
 @media (max-width: 480px) {
@@ -2841,17 +2766,6 @@ body.join-waitlist-open .btn-primary.nav-cta:hover {
         margin-top: 60px;
         padding: 1.25rem 1rem 2rem;
         max-width: 95%;
-    }
-    
-    .join-waitlist-input,
-    .join-waitlist-textarea {
-        padding: 0.625rem 0.875rem;
-        font-size: 0.875rem; /* Prevent zoom on iOS */
-    }
-    
-    .join-waitlist-submit {
-        padding: 0.625rem 1.25rem;
-        font-size: 0.875rem;
     }
 }
 
